@@ -5,10 +5,9 @@
 
     <test name="练习用例">
         <classes>
-            <class name="com.example.test.UserTest">
+            <class name="com.example.test.InitClass">
                 <methods>
-                    <include name="loginTest"/>
-                    <include name="getInfo"/>
+                    <include name="init"/>
 
                 </methods>
             </class>
