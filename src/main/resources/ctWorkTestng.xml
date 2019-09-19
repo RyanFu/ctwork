@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<suite name="崇天风控接口自动化">
+
+    <test name="练习用例">
+        <classes>
+            <class name="com.example.test.UserTest">
+                <methods>
+                    <include name="loginTest"/>
+                    <include name="getInfo"/>
+
+                </methods>
+            </class>
+
+
+        </classes>
+    </test>
+    <listeners>
+        <listener class-name="com.example.config.ExtentTestNGIReporterListener"/>
+    </listeners>
+
+</suite>
