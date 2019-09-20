@@ -28,11 +28,7 @@ public class InitClass {
         System.out.println(DatabaseUtil.getSqlSession(name2).selectList("findAll"));
         System.out.println(DatabaseUtil.getSqlSession(name2).selectList("findList"));
 
-        logger.info("11111111");
-        logger.warn("2222222");
-        logger.debug("111111333311");
-        logger.error("444444");
-
+        logger.info("返回结果={}",DatabaseUtil.getSqlSession(name1).selectList("findAll"));
 
     }
 

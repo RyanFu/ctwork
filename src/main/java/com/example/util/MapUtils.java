@@ -12,7 +12,7 @@ public class MapUtils {
 
     /**
      * 请求头工具类
-     * 包含Content-Type，Authorization，orgCode三个头信息
+     * 包含Content-Type头信息
      * @return
      */
     public static Map<String,String> HeadersMap(){
