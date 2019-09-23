@@ -34,7 +34,7 @@ public class UserTest {
     public static String JSESSIONID;
 
 
-   // @Test(groups = "loginTrue")
+    @Test(groups = "loginTrue")
     public void loginTest() throws IOException {
         String Url = host + loginUri;
 
@@ -67,7 +67,7 @@ public class UserTest {
     }
 
 
-   // @Test(dependsOnGroups = "loginTrue")
+    @Test(dependsOnGroups = "loginTrue")
     public void getInfo() {
         String getUserInfoUrl = host + bundle.getString("get.user.info.uri");
 
