@@ -5,23 +5,12 @@
 
     <test name="练习用例">
         <classes>
-            <class name="com.example.test.UserTest">
+            <class name="com.example.test.FirstTest">
 
                 <methods>
-                    <include name="loginTest"/>
-                    <include name="getInfo"/>
+                    <include name="loginJDTest"/>
                 </methods>
             </class>
-
-
-
-            <class name="com.example.test.InitClass">
-                <methods>
-                    <include name="init"/>
-
-                </methods>
-            </class>
-
 
         </classes>
     </test>
