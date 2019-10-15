@@ -21,7 +21,7 @@ public class DatabaseUtil {
         }
         //得到SqlSessionFactory，使用类加载器加载xml文件
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(reader);
-        //得到sqlsession对象，这个对象就能执行配置文件中的sql语句啦
+        //得到sqlsession对象，这个对象就能执行配置文件中的sql语句啦,传入true,可以自动commit
         SqlSession session = factory.openSession(true);
 
         return session;

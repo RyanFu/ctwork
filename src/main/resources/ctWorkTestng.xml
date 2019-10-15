@@ -5,7 +5,7 @@
 
     <test name="练习用例">
         <classes>
-            <class name="com.example.test.FirstTest">
+            <class name="com.example.ctwork.FirstTest">
 
                 <methods>
                     <include name="loginJDTest"/>

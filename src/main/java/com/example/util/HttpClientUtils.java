@@ -2,6 +2,7 @@ package com.example.util;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -23,7 +24,6 @@ import java.util.Map;
  * httpclient工具类
  */
 public class HttpClientUtils {
-
 
     /**
      * get请求,不含请求头
@@ -137,5 +137,6 @@ public class HttpClientUtils {
         }
         return null;
     }
+
 
 }

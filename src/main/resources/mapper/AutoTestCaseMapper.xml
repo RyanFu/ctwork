@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间mapper,如果有多个mapper文件，这个必须唯一 -->
+<mapper namespace="com.example.dao.AutoTestCaseDao">
+
+    <select id="selectByCaseName" parameterType="string" resultType="com.example.pojo.AutoTestCase">
+        select * from auto_test_case where case_name=#{caseName};
+    </select>
+
+    <insert id="addAutoTestCase" parameterType="com.example.pojo.AutoTestCase">
+       INSERT INTO auto_test_case
+       (case_name, url, method, heads,param, state, creat_time, update_time)
+        VALUES
+       (#{caseName}, #{url}, #{method}, #{heads}, #{param}, #{state}, now(), now());
+    </insert>
+
+    <update id="updateAutoTestCase" parameterType="com.example.pojo.AutoTestCase">
+        update auto_test_case set state=#{state} where case_name=#{caseName};
+    </update>
+
+    <update id="updateAllState">
+        update auto_test_case set state=null;
+    </update>
+
+    <select id="getAllAutoTestCase" resultType="com.example.pojo.AutoTestCase">
+         select * from auto_test_case;
+    </select>
+
+<update id="updateCaseInfo" parameterType="com.example.pojo.AutoTestCase">
+
+    update auto_test_case
+    <set >
+        <if test="id != null" >
+            id = #{id},
+        </if>
+        <if test="caseName != null" >
+            case_name = #{caseName},
+        </if>
+        <if test="url != null" >
+            url = #{url},
+        </if>
+        <if test="method != null" >
+            method = #{method},
+        </if>
+        <if test="param != null" >
+            param = #{param},
+        </if>
+        <if test="heads != null" >
+            heads = #{heads},
+        </if>
+        <if test="state != null" >
+            state = #{state},
+        </if>
+        <if test="creatTime != null" >
+            creat_time = #{creatTime},
+        </if>
+        <if test="updateTime != null" >
+            update_time = now(),
+        </if>
+    </set>
+    where case_name = #{caseName}
+
+</update>
+
+
+</mapper>
