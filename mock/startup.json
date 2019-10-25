@@ -1,0 +1,31 @@
+[
+  {
+    "description":"这是一个mock高德设备分的请求",
+    "request":{
+      "uri":"/test",
+      "method":"get"
+    },
+    "response":{
+      "status":200,
+      "json":{
+        "code": "000000",
+        "message": "成功",
+        "extra": null,
+        "data": {
+          "data": {
+            "ap": 0.123,
+            "pr": 0.634,
+            "in": 0.114,
+            "li": 0.544,
+            "cg": 0.174,
+            "de": 0.414
+          },
+          "errcode": 0,
+          "errmsg": "OK",
+          "errdetail": null,
+          "ext": ""
+        }
+      }
+    }
+  }
+]

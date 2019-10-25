@@ -1,15 +1,18 @@
 package com.example.service.impl;
 
+import com.example.common.Const;
 import com.example.dao.AutoTestCaseDao;
 import com.example.pojo.AutoTestCase;
 import com.example.pojo.TestDto;
 import com.example.service.AutoTestCaseService;
 import com.example.vo.ResponseResult;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.testng.TestNG;
+import org.testng.collections.Lists;
 
 import java.util.List;
 
@@ -21,17 +24,39 @@ public class AutoTestCaseServiceImpl implements AutoTestCaseService {
     @Autowired
     private AutoTestCaseDao autoTestCaseDao;
 
+    /**
+     * java驱动testNG运行测试用例
+     */
+    @Override
+    public ResponseResult xmlLoad() {
+        TestNG testng = new TestNG();
+        List suites = Lists.newArrayList();
+        suites.add(Const.XMLPATH);
+        testng.setTestSuites(suites);
+        testng.run();
+
+        System.out.println(testng.getReporters());
+
+        return new ResponseResult(200,"success","用例执行成功，请等待");
+
+    }
+
     @Override
     public ResponseResult addAutoTestCase(TestDto testDto) {
         AutoTestCase autoTestCase=new AutoTestCase();
 
         autoTestCase.setCaseName(testDto.getCaseName());
-        autoTestCase.setUrl(testDto.getUrl());
+        autoTestCase.setHost(testDto.getHost());
+        autoTestCase.setPort(testDto.getPort());
+        autoTestCase.setUri(testDto.getUri());
         autoTestCase.setMethod(testDto.getMethod());
-        autoTestCase.setHeads(new JSONObject(testDto.getHeadMap()).toString());
-        autoTestCase.setParam(new JSONObject(testDto.getParamMap()).toString());
-        autoTestCase.setState(testDto.getState());
-
+        if(null!=testDto.getHeadMap()){
+            autoTestCase.setHeads(testDto.getHeadMap().toString());
+        }
+        autoTestCase.setParamType(testDto.getParamType());
+        if(null !=testDto.getParamMap()){
+            autoTestCase.setParam(testDto.getParamMap().toString());
+        }
         AutoTestCase testCase = autoTestCaseDao.selectByCaseName(autoTestCase.getCaseName());
         if (testCase !=null) {
             return new ResponseResult(400, "用例名称已存在，请修改");
@@ -49,14 +74,21 @@ public class AutoTestCaseServiceImpl implements AutoTestCaseService {
     public ResponseResult updateCaseInfo(TestDto testDto) {
         AutoTestCase autoTestCase=new AutoTestCase();
         autoTestCase.setCaseName(testDto.getCaseName());
-        autoTestCase.setUrl(testDto.getUrl());
+        autoTestCase.setHost(testDto.getHost());
+        autoTestCase.setPort(testDto.getPort());
+        autoTestCase.setUri(testDto.getUri());
         autoTestCase.setMethod(testDto.getMethod());
-        autoTestCase.setHeads(new JSONObject(testDto.getHeadMap()).toString());
-        autoTestCase.setParam(new JSONObject(testDto.getParamMap()).toString());
-        autoTestCase.setState(testDto.getState());
+        if(null!=testDto.getHeadMap()){
+            autoTestCase.setHeads(testDto.getHeadMap().toString());
+        }
+        autoTestCase.setParamType(testDto.getParamType());
+        if(null !=testDto.getParamMap()){
+            autoTestCase.setParam(testDto.getParamMap().toString());
+        }
         if(testDto.getCaseName().equals(null)){
             return new ResponseResult(400, "用例名称不能为空");
         }
+
         int i=autoTestCaseDao.updateCaseInfo(autoTestCase);
         if(i==0){
             return new ResponseResult(400, "修改用例失败");

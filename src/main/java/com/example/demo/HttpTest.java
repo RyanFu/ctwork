@@ -14,77 +14,73 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 
 /**
- * 从数据库读取测试case
+ * 从数据库读取测试case并执行
  */
 public class HttpTest {
 
     private static Logger logger=LoggerFactory.getLogger(HttpTest.class);
 
-    public static SqlSession sqlSession=DatabaseUtil.getSqlSession("databaseConfig-localhost.xml");
+    public static SqlSession sqlSession=DatabaseUtil.getSqlSession("databaseConfig.xml");
 
-    public static  List<AutoTestCase> list=sqlSession.selectList("getAllAutoTestCase");
+    public static  List<AutoTestCase> list=sqlSession.selectList("findAll");
 
     @BeforeTest
     public void beforeTest(){
-        sqlSession.update("updateAllState");
+      sqlSession.update("updateAllState");
     }
 
-    @Test
-    public void demo1() throws IOException {
+    @Test(groups = "login")
+    public void login(){
+        AutoTestCase autoTestCase=sqlSession.selectOne("findByCaseName",CaseNameEnum.LOGIN.getMessage());
+        AutoTestCase testCase=new AutoTestCase();
+        testCase.setCaseName(autoTestCase.getCaseName());
 
+        /**
+         * 把String格式的参数转化为Map<key,values>格式   {"password":"wangwua123","username":"wangwua"}===>Map
+         */
+        Map<String,Object> params=JsonUtils.stringToJson(autoTestCase.getParam());
+        Map<String, Object> headers=JsonUtils.stringToJson(autoTestCase.getHeads());
 
-       for (AutoTestCase lists:list){
+        String result=HttpUtils.postForSession(autoTestCase.getHost()+":"+autoTestCase.getPort()+autoTestCase.getUri(),params,headers);
+        JSONObject jsonObject=new JSONObject(result);
+        int status= (int) jsonObject.get("status");
+        logger.info("登录返回结果={}",jsonObject);
+        if(status==0){
+            testCase.setState(CaseEnum.SUCCESS.getMessage());
+            testCase.setActualResult(result);
+            sqlSession.update("updateState",testCase);
+        }else {
+            testCase.setState(CaseEnum.FAIL.getMessage());
+            testCase.setActualResult(result);
+            sqlSession.update("updateState",testCase);
+        }
+        Assert.assertEquals(jsonObject.get("status"),0);
 
-           if(lists.getCaseName().equals(CaseNameEnum.LOGIN.getMessage())){
-               AutoTestCase autoTestCase=sqlSession.selectOne("selectByCaseName",CaseNameEnum.LOGIN.getMessage());
+    }
+    @Test(dependsOnGroups = "login")
+    public void demo1() {
+               AutoTestCase autoTestCase=sqlSession.selectOne("findByCaseName",CaseNameEnum.GET_USER_INFO.getMessage());
                AutoTestCase testCase=new AutoTestCase();
                testCase.setCaseName(autoTestCase.getCaseName());
 
-               /**
-                * 把String格式的参数转化为Map格式   {"password":"wangwua123","username":"wangwua"}===>Map
-                */
-               Map<String,Object> param=JsonUtils.stringToJson(autoTestCase.getParam());
-               Map<String, Object> headers=JsonUtils.stringToJson(autoTestCase.getHeads());
-
-              String result=HttpUtils.postForSession(autoTestCase.getUrl(),param,headers);
-               JSONObject jsonObject=new JSONObject(result);
-               int status= (int) jsonObject.get("status");
-               logger.info("登录返回结果={}",jsonObject);
-               if(status==0){
-                   testCase.setState(CaseEnum.SUCCESS.getMessage());
-                   sqlSession.update("updateCaseInfo",testCase);
-               }else {
-                   testCase.setState(CaseEnum.FAIL.getMessage());
-                   sqlSession.update("updateCaseInfo",testCase);
-               }
-               Assert.assertEquals(jsonObject.get("status"),0);
-
-           }else if(lists.getCaseName().equals(CaseNameEnum.GET_USER_INFO.getMessage())){
-               AutoTestCase autoTestCase=sqlSession.selectOne("selectByCaseName",CaseNameEnum.GET_USER_INFO.getMessage());
-               AutoTestCase testCase=new AutoTestCase();
-               testCase.setCaseName(autoTestCase.getCaseName());
-
-               String result=HttpUtils.getWithSession(autoTestCase.getUrl());
+               String result=HttpUtils.getWithSession(autoTestCase.getHost()+":"+autoTestCase.getPort()+autoTestCase.getUri());
                JSONObject jsonObject=new JSONObject(result);
                logger.info("获取登录信息={}",jsonObject);
                if(jsonObject.get("status").equals(0)){
                    testCase.setState(CaseEnum.SUCCESS.getMessage());
-                   sqlSession.update("updateCaseInfo",testCase);
+                   testCase.setActualResult(result);
+                   sqlSession.update("updateState",testCase);
                }else {
                    testCase.setState(CaseEnum.FAIL.getMessage());
-                   sqlSession.update("updateCaseInfo",testCase);
+                   testCase.setActualResult(result);
+                   sqlSession.update("updateState",testCase);
                }
                Assert.assertEquals(jsonObject.get("status"),0);
 
            }
-
-       }
-
-    }
 }

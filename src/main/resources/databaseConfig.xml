@@ -2,8 +2,8 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-     <!--开启驼峰映射 ，为自定义的SQL语句服务
-    设置启用数据库字段下划线映射到java对象的驼峰式命名属性，默认为false-->
+    <!--开启驼峰映射 ，为自定义的SQL语句服务
+   设置启用数据库字段下划线映射到java对象的驼峰式命名属性，默认为false-->
     <settings>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
@@ -16,17 +16,17 @@
                 <!-- 1.加载数据库驱动 -->
                 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
                 <!-- 2.数据库连接地址 -->
-                <property name="url" value="jdbc:mysql://rm-uf688mus342kdx32ymo.mysql.rds.aliyuncs.com:3306/shuabao-test"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/test"/>
                 <!-- 数据库用户... -->
                 <property name="username" value="root"/>
                 <!-- 数据库密码... -->
-                <property name="password" value="1zLMFysKhfgY3j90"/>
+                <property name="password" value="12345678"/>
             </dataSource>
         </environment>
     </environments>
     <!-- 注册映射文件：java对象与数据库之间的xml文件路径！ -->
-<mappers>
-    <mapper resource="mapper/shuabao-testMapper.xml"/>
-</mappers>
+    <mappers>
+         <mapper resource="mapper/testNGMapper.xml"/>
+    </mappers>
 
 </configuration>

@@ -2,104 +2,27 @@
 <testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
   <reporter-output>
   </reporter-output>
-  <suite name="崇天风控接口自动化" duration-ms="492" started-at="2019-10-14T07:52:12Z" finished-at="2019-10-14T07:52:12Z">
+  <suite name="崇天风控接口自动化" duration-ms="289" started-at="2019-10-25T02:46:32Z" finished-at="2019-10-25T02:46:32Z">
     <groups>
+      <group name="login">
+        <method signature="HttpTest.login()[pri:0, instance:com.example.demo.HttpTest@37e023da]" name="login" class="com.example.demo.HttpTest"/>
+      </group> <!-- login -->
     </groups>
-    <test name="练习用例" duration-ms="492" started-at="2019-10-14T07:52:12Z" finished-at="2019-10-14T07:52:12Z">
-      <class name="com.example.ctwork.FirstTest">
-        <test-method status="PASS" signature="loginJDTest(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.example.ctwork.FirstTest@bc39871]" name="loginJDTest" duration-ms="233" started-at="2019-10-14T15:52:12Z" data-provider="LoginData" finished-at="2019-10-14T15:52:12Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[登录]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[http://10.61.11.125:8088/v1/user/login.do]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[post]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[{"username":"wangwua","password":"wangwua123"}]]>
-              </value>
-            </param>
-            <param index="4">
-              <value>
-                <![CDATA[{
-    "status": 0,
-    "msg": "success",
-    "data": {
-        "id": 25,
-        "username": "wangwua",
-        "password": "9F096562326861D7226EDF730F23616C",
-        "email": "wangwua123@qq.com",
-        "phone": null,
-        "question": null,
-        "answer": null,
-        "role": 0,
-        "createTime": 1560973698000,
-        "updateTime": 1560973698000
-    }
-}]]>
-              </value>
-            </param>
-          </params>
+    <test name="练习用例" duration-ms="289" started-at="2019-10-25T02:46:32Z" finished-at="2019-10-25T02:46:32Z">
+      <class name="com.example.demo.HttpTest">
+        <test-method status="PASS" signature="beforeTest()[pri:0, instance:com.example.demo.HttpTest@37e023da]" name="beforeTest" is-config="true" duration-ms="10" started-at="2019-10-25T10:46:32Z" finished-at="2019-10-25T10:46:32Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- loginJDTest -->
-        <test-method status="PASS" signature="loginJDTest(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.example.ctwork.FirstTest@bc39871]" name="loginJDTest" duration-ms="6" started-at="2019-10-14T15:52:12Z" data-provider="LoginData" finished-at="2019-10-14T15:52:12Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[获取用户登录信息]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[http://10.61.11.125:8088/v1/user/getUserInfo.do]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[get]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[]]>
-              </value>
-            </param>
-            <param index="4">
-              <value>
-                <![CDATA[{
-    "status": 0,
-    "msg": "success",
-    "data": {
-        "id": 25,
-        "username": "wangwua",
-        "password": "9F096562326861D7226EDF730F23616C",
-        "email": "wangwua123@qq.com",
-        "phone": null,
-        "question": null,
-        "answer": null,
-        "role": 0,
-        "createTime": 1560973698000,
-        "updateTime": 1560973698000
-    }
-}]]>
-              </value>
-            </param>
-          </params>
+        </test-method> <!-- beforeTest -->
+        <test-method status="PASS" signature="login()[pri:0, instance:com.example.demo.HttpTest@37e023da]" name="login" duration-ms="261" started-at="2019-10-25T10:46:32Z" finished-at="2019-10-25T10:46:32Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- loginJDTest -->
-      </class> <!-- com.example.ctwork.FirstTest -->
+        </test-method> <!-- login -->
+        <test-method status="PASS" signature="demo1()[pri:0, instance:com.example.demo.HttpTest@37e023da]" name="demo1" duration-ms="11" depends-on-groups="login" started-at="2019-10-25T10:46:32Z" finished-at="2019-10-25T10:46:32Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- demo1 -->
+      </class> <!-- com.example.demo.HttpTest -->
     </test> <!-- 练习用例 -->
   </suite> <!-- 崇天风控接口自动化 -->
 </testng-results>

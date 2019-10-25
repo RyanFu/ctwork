@@ -5,10 +5,11 @@
 
     <test name="练习用例">
         <classes>
-            <class name="com.example.ctwork.FirstTest">
+            <class name="com.example.demo.HttpTest">
 
                 <methods>
-                    <include name="loginJDTest"/>
+                    <include name="login"/>
+                    <include name="demo1"/>
                 </methods>
             </class>
 

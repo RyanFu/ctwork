@@ -10,49 +10,53 @@
 
     <insert id="addAutoTestCase" parameterType="com.example.pojo.AutoTestCase">
        INSERT INTO auto_test_case
-       (case_name, url, method, heads,param, state, creat_time, update_time)
+       (case_name, host,port, uri, method, heads,param_type,param, state,actual_result, creat_time, update_time)
         VALUES
-       (#{caseName}, #{url}, #{method}, #{heads}, #{param}, #{state}, now(), now());
+       (#{caseName},#{host},#{port}, #{uri}, #{method}, #{heads}, #{paramType},#{param}, #{state}, #{actualResult},now(), now());
     </insert>
 
     <update id="updateAutoTestCase" parameterType="com.example.pojo.AutoTestCase">
         update auto_test_case set state=#{state} where case_name=#{caseName};
     </update>
 
-    <update id="updateAllState">
-        update auto_test_case set state=null;
-    </update>
-
-    <select id="getAllAutoTestCase" resultType="com.example.pojo.AutoTestCase">
-         select * from auto_test_case;
-    </select>
-
 <update id="updateCaseInfo" parameterType="com.example.pojo.AutoTestCase">
 
     update auto_test_case
     <set >
-        <if test="id != null" >
+        <if test="id != null and ''!=id" >
             id = #{id},
         </if>
-        <if test="caseName != null" >
+        <if test="caseName != null and ''!=caseName" >
             case_name = #{caseName},
         </if>
-        <if test="url != null" >
-            url = #{url},
+        <if test="host != null and ''!=host" >
+            host = #{host},
         </if>
-        <if test="method != null" >
+        <if test="port != null and ''!=port" >
+            port = #{port},
+        </if>
+        <if test="uri != null and ''!=uri" >
+            uri = #{uri},
+        </if>
+        <if test="method != null and ''!=method" >
             method = #{method},
         </if>
-        <if test="param != null" >
-            param = #{param},
-        </if>
-        <if test="heads != null" >
+        <if test="heads != null and ''!=heads" >
             heads = #{heads},
         </if>
-        <if test="state != null" >
+        <if test="paramType != null and ''!=paramType" >
+            param_type = #{paramType},
+        </if>
+        <if test="param != null and ''!=param" >
+            param = #{param},
+        </if>
+        <if test="state != null and ''!=state" >
             state = #{state},
         </if>
-        <if test="creatTime != null" >
+        <if test="actualResult != null and ''!=actualResult" >
+            actual_result = #{actualResult},
+        </if>
+        <if test="creatTime != null and ''!=creatTime" >
             creat_time = #{creatTime},
         </if>
         <if test="updateTime != null" >
@@ -62,6 +66,10 @@
     where case_name = #{caseName}
 
 </update>
+
+    <select id="getAllAutoTestCase" resultType="com.example.pojo.AutoTestCase">
+         select * from auto_test_case;
+    </select>
 
 
 </mapper>
