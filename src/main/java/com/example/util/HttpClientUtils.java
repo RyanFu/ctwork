@@ -40,8 +40,8 @@ public class HttpClientUtils {
             return result;
         } catch (IOException e) {
             e.printStackTrace();
+            return e.getMessage();
         }
-        return null;
     }
 
     /**
@@ -64,8 +64,8 @@ public class HttpClientUtils {
             return result;
         } catch (IOException e) {
             e.printStackTrace();
+            return e.getMessage();
         }
-        return null;
     }
 
     /**
@@ -83,21 +83,16 @@ public class HttpClientUtils {
         for (Map.Entry<String, String> header : headers.entrySet()){
             post.setHeader(header.getKey(),header.getValue());
         }
-
         post.setEntity(entity);
-
         try {
             HttpResponse response=client.execute(post);
             String result=EntityUtils.toString(response.getEntity(),"utf-8");
-
             return result;
-
         } catch (Exception e) {
             e.printStackTrace();
+            return e.getMessage();
         }
-       return null;
     }
-
 
     /**
      * 普通post请求,key-value
@@ -109,9 +104,7 @@ public class HttpClientUtils {
 
         HttpPost post=new HttpPost(url);
         DefaultHttpClient client=new DefaultHttpClient();
-
        try {
-
         //封装请求头
         for (Map.Entry<String, String> header : headers.entrySet()){
             post.setHeader(header.getKey(),header.getValue());
@@ -134,8 +127,8 @@ public class HttpClientUtils {
 
         } catch (Exception e) {
             e.printStackTrace();
+            return e.getMessage();
         }
-        return null;
     }
 
 

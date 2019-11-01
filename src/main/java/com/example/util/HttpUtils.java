@@ -59,8 +59,8 @@ public class HttpUtils {
 
         } catch (Exception e) {
             e.printStackTrace();
+            return e.getMessage();
         }
-        return null;
     }
 
     /**
@@ -79,8 +79,8 @@ public class HttpUtils {
             return result;
         } catch (IOException e) {
             e.printStackTrace();
+            return e.getMessage();
         }
-        return null;
     }
 
 }

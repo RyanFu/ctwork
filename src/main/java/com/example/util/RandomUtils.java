@@ -15,7 +15,7 @@ public class RandomUtils {
      */
     public static int getRandomCode() {
         Random random = new Random();
-        return random.nextInt(99999999);
+        return random.nextInt(999999999);
     }
 
     /**
