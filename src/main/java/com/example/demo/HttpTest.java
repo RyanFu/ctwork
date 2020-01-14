@@ -46,11 +46,15 @@ public class HttpTest {
         Map<String,Object> params=JsonUtils.stringToJson(autoTestCase.getParam());
         Map<String, Object> headers=JsonUtils.stringToJson(autoTestCase.getHeads());
 
-        String result=HttpUtils.postForSession(autoTestCase.getHost()+":"+autoTestCase.getPort()+autoTestCase.getUri(),params,headers);
+        String url=autoTestCase.getHost()+":"+autoTestCase.getPort()+autoTestCase.getUri();
+        String result=HttpUtils.postForSession(url,params,headers);
         JSONObject jsonObject=new JSONObject(result);
         int status= (int) jsonObject.get("status");
         logger.info("登录返回结果={}",jsonObject);
+        Assert.assertEquals(status,0);
+
         if(status==0){
+
             testCase.setState(CaseEnum.SUCCESS.getMessage());
             testCase.setActualResult(result);
             sqlSession.update("updateState",testCase);
@@ -59,7 +63,6 @@ public class HttpTest {
             testCase.setActualResult(result);
             sqlSession.update("updateState",testCase);
         }
-        Assert.assertEquals(jsonObject.get("status"),0);
 
     }
     @Test(dependsOnGroups = "login")

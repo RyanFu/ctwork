@@ -1,4 +1,4 @@
-package com.example.pojo;
+package com.example.dto;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.Data;

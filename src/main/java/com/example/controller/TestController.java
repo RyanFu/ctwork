@@ -1,7 +1,7 @@
 package com.example.controller;
 
 
-import com.example.pojo.TestDto;
+import com.example.dto.TestDto;
 import com.example.service.AutoTestCaseService;
 import com.example.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;

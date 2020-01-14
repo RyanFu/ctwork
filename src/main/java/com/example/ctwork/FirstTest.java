@@ -1,6 +1,7 @@
 package com.example.ctwork;
 
 import com.example.common.Const;
+import com.example.util.ExcelReaderUtils;
 import com.example.util.HttpClientUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -35,7 +36,7 @@ public class FirstTest {
     public Object[][] login() {
         // 测试数据准备
         String file = Const.EXCEL_PATH;
-        Object[][] records=ExcelReader.getExpectationData(file, "login");
+        Object[][] records=ExcelReaderUtils.getExpectationData(file, "login");
 
         return records ;
     }

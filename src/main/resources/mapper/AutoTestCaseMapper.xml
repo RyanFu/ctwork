@@ -4,10 +4,17 @@
 <!-- 命名空间mapper,如果有多个mapper文件，这个必须唯一 -->
 <mapper namespace="com.example.dao.AutoTestCaseDao">
 
+    <!--通过用例名字去查询用例-->
     <select id="selectByCaseName" parameterType="string" resultType="com.example.pojo.AutoTestCase">
         select * from auto_test_case where case_name=#{caseName};
     </select>
 
+    <!--通过用例点击用例id进行用例执行-->
+    <select id="selectByCaseId" parameterType="int" resultType="com.example.pojo.AutoTestCase">
+        select * from auto_test_case where id=#{id};
+    </select>
+
+    <!--添加用例-->
     <insert id="addAutoTestCase" parameterType="com.example.pojo.AutoTestCase">
        INSERT INTO auto_test_case
        (case_name, host,port, uri, method, heads,param_type,param, state,actual_result, creat_time, update_time)
@@ -15,10 +22,12 @@
        (#{caseName},#{host},#{port}, #{uri}, #{method}, #{heads}, #{paramType},#{param}, #{state}, #{actualResult},now(), now());
     </insert>
 
+    <!--更新用例执行状态-->
     <update id="updateAutoTestCase" parameterType="com.example.pojo.AutoTestCase">
         update auto_test_case set state=#{state} where case_name=#{caseName};
     </update>
 
+    <!--修改用例-->
 <update id="updateCaseInfo" parameterType="com.example.pojo.AutoTestCase">
 
     update auto_test_case
@@ -67,6 +76,7 @@
 
 </update>
 
+    <!--查询所有用例-->
     <select id="getAllAutoTestCase" resultType="com.example.pojo.AutoTestCase">
          select * from auto_test_case;
     </select>

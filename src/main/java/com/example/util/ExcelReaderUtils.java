@@ -1,10 +1,11 @@
-package com.example.ctwork;
+package com.example.util;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import java.io.FileInputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -13,8 +14,7 @@ import java.util.List;
 /**
  * 读取excel文件并解析
  */
-public class ExcelReader {
-
+public class ExcelReaderUtils {
 
     public static XSSFSheet ExcelWSheet;
     public static XSSFWorkbook ExcelWBook;
@@ -23,37 +23,37 @@ public class ExcelReader {
 
     public static String[][] getExpectationData(String file, String sheetName) {
 
-            try {
-                FileInputStream ExcelFile = new FileInputStream(file);//获取Excel文件
-                ExcelWBook = new XSSFWorkbook(ExcelFile);
-                // 得到工作表名称
-                ExcelWSheet = ExcelWBook.getSheet(sheetName);
-                // 得到总行数
-                int rowNum = ExcelWSheet.getLastRowNum();
-                List<String[]> results = new ArrayList<String[]>();
-                for (int i = 1; i <= rowNum; i++) {
-                    // 当前行
-                    XSSFRow row = ExcelWSheet.getRow(i);
-                    int colNum = row.getLastCellNum();
-                    String[] data = new String[colNum];
-                    // 当前行所有列
-                    for (int j = 0; j < colNum; j++) {
-                        try {
-                            data[j] = getCellValue(row.getCell(j));
-                        } catch (NullPointerException e) { // 如果单元格为空的时候，则用这个来处理
-                            data[j] = "";
-                        }
+        try {
+            FileInputStream ExcelFile = new FileInputStream(file);//获取Excel文件
+            ExcelWBook = new XSSFWorkbook(ExcelFile);
+            // 得到工作表名称
+            ExcelWSheet = ExcelWBook.getSheet(sheetName);
+            // 得到总行数
+            int rowNum = ExcelWSheet.getLastRowNum();
+            List<String[]> results = new ArrayList<String[]>();
+            for (int i = 1; i <= rowNum; i++) {
+                // 当前行
+                XSSFRow row = ExcelWSheet.getRow(i);
+                int colNum = row.getLastCellNum();
+                String[] data = new String[colNum];
+                // 当前行所有列
+                for (int j = 0; j < colNum; j++) {
+                    try {
+                        data[j] = getCellValue(row.getCell(j));
+                    } catch (NullPointerException e) { // 如果单元格为空的时候，则用这个来处理
+                        data[j] = "";
                     }
-                    // 把data[]数组的数据存在list<[]>中
-                    results.add(data);
                 }
-                String[][] returnArray = new String[results.size()][rowNum];
-                for (int i = 0; i < returnArray.length; i++) {
-                    returnArray[i] = (String[]) results.get(i);
-                }
-                return returnArray;
+                // 把data[]数组的数据存在list<[]>中
+                results.add(data);
+            }
+            String[][] returnArray = new String[results.size()][rowNum];
+            for (int i = 0; i < returnArray.length; i++) {
+                returnArray[i] = (String[]) results.get(i);
+            }
+            return returnArray;
 
-            }catch (Exception e){
+        }catch (Exception e){
             return null;
         }
 
@@ -83,6 +83,6 @@ public class ExcelReader {
                 cellValue = "";
         }
         return cellValue;
-     }
+    }
 
- }
+}

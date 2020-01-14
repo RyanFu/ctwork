@@ -1,6 +1,6 @@
 package com.example.service;
 
-import com.example.pojo.TestDto;
+import com.example.dto.TestDto;
 import com.example.vo.ResponseResult;
 
 public interface AutoTestCaseService {

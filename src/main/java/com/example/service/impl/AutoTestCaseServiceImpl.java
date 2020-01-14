@@ -3,7 +3,7 @@ package com.example.service.impl;
 import com.example.common.Const;
 import com.example.dao.AutoTestCaseDao;
 import com.example.pojo.AutoTestCase;
-import com.example.pojo.TestDto;
+import com.example.dto.TestDto;
 import com.example.service.AutoTestCaseService;
 import com.example.vo.ResponseResult;
 import org.slf4j.Logger;
