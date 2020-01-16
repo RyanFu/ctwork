@@ -5,11 +5,9 @@
 
     <test name="练习用例">
         <classes>
-            <class name="com.example.demo.HttpTest">
-
+            <class name="com.example.ctwork.datacenter.TestQYDatacenter">
                 <methods>
-                    <include name="login"/>
-                    <include name="demo1"/>
+                    <include name="QYDataCenterRead"/>
                 </methods>
             </class>
 

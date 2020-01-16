@@ -6,7 +6,6 @@ import com.example.util.ExcelReaderUtils;
 import com.example.util.HttpClientUtils;
 
 import com.example.util.JsonReadUtils;
-import com.example.util.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.DataProvider;
