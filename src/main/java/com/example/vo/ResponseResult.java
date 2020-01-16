@@ -19,4 +19,9 @@ public class ResponseResult<T> {
         this.status = status;
         this.message = message;
     }
+
+
+
+
+
 }

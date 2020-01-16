@@ -1,8 +1,8 @@
 package com.example.util;
 
+import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.CookieStore;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -10,7 +10,6 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +73,7 @@ public class HttpClientUtils {
      * @param param
      * @return
      */
-    public static String postMethod(String url,JSONObject param,Map<String,String> headers){
+    public static String postMethod(String url, JSONObject param, Map<String,String> headers){
 
         HttpPost post=new HttpPost(url);
         DefaultHttpClient client=new DefaultHttpClient();
@@ -116,7 +115,7 @@ public class HttpClientUtils {
             list.add(new BasicNameValuePair(key, String.valueOf(param.get(key))));
         }
 
-        //将参数进行编码为合适的格式,如将键值对编码为param1=value1&param2=value2
+        //将参数进行编码为合适的格式,如将键值对编码为 param1=value1&param2=value2
         UrlEncodedFormEntity entity=new UrlEncodedFormEntity(list,"utf-8");
         post.setEntity(entity);
 

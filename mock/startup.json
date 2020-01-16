@@ -1,30 +1,28 @@
 [
   {
-    "description":"这是一个mock高德设备分的请求",
-    "request":{
-      "uri":"/test",
-      "method":"get"
+    "description":"这是一个带参数的post的请求",
+    "request": {
+      "uri": "/data-gateway/api/v1/service",
+      "method": "post"
     },
     "response":{
-      "status":200,
       "json":{
-        "code": "000000",
-        "message": "成功",
-        "extra": null,
-        "data": {
-          "data": {
-            "ap": 0.123,
-            "pr": 0.634,
-            "in": 0.114,
-            "li": 0.544,
-            "cg": 0.174,
-            "de": 0.414
-          },
-          "errcode": 0,
-          "errmsg": "OK",
-          "errdetail": null,
-          "ext": ""
-        }
+        "resCode": "0000",
+        "resMsg": "请求成功",
+        "tranNo": "201805111643462d555e10-3",
+        "sign": "CCD01750E201B277CE099E6869B26B42",
+        "data": [
+          {
+            "statusCode": 1,
+            "statusMsg": "查询成功,查得结果",
+            "quotaID": "RZ018",
+            "quotaValue": {
+              "reslut": "T",
+              "message": "验证一致"
+            },
+            "channel": 2
+          }
+        ]
       }
     }
   }
