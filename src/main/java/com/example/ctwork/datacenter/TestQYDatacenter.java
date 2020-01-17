@@ -43,7 +43,7 @@ public class TestQYDatacenter {
 
         String response = HttpClientUtils.postMethod(Const.test_wj_data_center_url, jsonObject, headers);
         JSONObject json=JSON.parseObject(response);
-        logger.info(var_name +"--"+desc+"---->" + json.get("data"));
+        logger.info(var_name +"--"+desc+"---->" + json.getString("data"));
 
     }
 }

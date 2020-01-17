@@ -50,7 +50,7 @@ public class ProdQYDataCenter {
         com.alibaba.fastjson.JSONObject jsonObject =JsonReadUtils.readJsonFile(TD_PARAM_JSON);
         jsonObject.put("fields",var_name);
 
-        String response = HttpClientUtils.postMethod(Const.pro_wj_data_center_url, jsonObject, headers);
+        String response = HttpClientUtils.postMethod(Const.pro_ct_data_center_url, jsonObject, headers);
         com.alibaba.fastjson.JSONObject json=JSON.parseObject(response);
 
         logger.info(var_name +"--"+desc+"---->" + json.get("data"));

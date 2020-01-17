@@ -20,8 +20,4 @@ public class ResponseResult<T> {
         this.message = message;
     }
 
-
-
-
-
 }

@@ -4,6 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum CaseNameEnum {
+
     LOGIN("用户登录"),
     GET_USER_INFO("获取用户登录信息")
 
