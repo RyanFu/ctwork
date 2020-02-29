@@ -17,7 +17,7 @@ import java.util.Map;
 
 
 /**
- * mmall工具类
+ * Http工具类
  */
 public class HttpUtils {
 

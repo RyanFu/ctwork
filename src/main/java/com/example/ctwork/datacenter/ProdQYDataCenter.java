@@ -17,15 +17,31 @@ import java.util.Map;
  * @author yicg
  * @createTime 2020年01月14日 11:53:00
  * @Description  迁移数据线上回归
+ *
  */
 
 public class ProdQYDataCenter {
 
     private static Logger logger=LoggerFactory.getLogger(ProdQYDataCenter.class);
+    //线上地址
+    private static String URL=Const.PRO_WJ_DATA_CENTER_URL;
 
-    //同盾字段请求参数json地址
-    public static String TD_PARAM_JSON=Const.TD_PROD_JSON_PATH;
+    //sheet3字段和参数
+    public static String PROD_PARAM_SHEET_003=Const.PROD_SHEET_003;
+    public static String FILE_NAME_SHEET_003="同盾003";
 
+
+    //sheet4字段和参数
+    public static String PROD_PARAM_SHEET_004=Const.PROD_SHEET_004;
+    public static String FILE_NAME_SHEET_004="本地字段004";
+
+    //sheet5字段和参数
+    public static String PROD_PARAM_SHEET_005=Const.PROD_SHEET_005;
+    public static String FILE_NAME_SHEET_005="迁移字段005";
+
+    //sheet6字段和参数
+    public static String PROD_PARAM_SHEET_006=Const.PROD_SHEET_006;
+    public static String FILE_NAME_SHEET_006="优分006";
 
     /**
      * 读取excel文件
@@ -35,8 +51,7 @@ public class ProdQYDataCenter {
         // 测试数据准备
         String file = Const.QY_DATA_CENTER__PATH;
 
-       // Object[][] records=ExcelReaderUtils.getExpectationData(file,"优分");
-        Object[][] records=ExcelReaderUtils.getExpectationData(file,"同盾");
+        Object[][] records=ExcelReaderUtils.getExpectationData(file,FILE_NAME_SHEET_006);
 
         return records ;
     }
@@ -47,10 +62,10 @@ public class ProdQYDataCenter {
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
 
-        com.alibaba.fastjson.JSONObject jsonObject =JsonReadUtils.readJsonFile(TD_PARAM_JSON);
+        com.alibaba.fastjson.JSONObject jsonObject =JsonReadUtils.readJsonFile(PROD_PARAM_SHEET_006);
         jsonObject.put("fields",var_name);
 
-        String response = HttpClientUtils.postMethod(Const.pro_ct_data_center_url, jsonObject, headers);
+        String response = HttpClientUtils.postMethod(URL, jsonObject, headers);
         com.alibaba.fastjson.JSONObject json=JSON.parseObject(response);
 
         logger.info(var_name +"--"+desc+"---->" + json.get("data"));

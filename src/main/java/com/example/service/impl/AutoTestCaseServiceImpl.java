@@ -36,7 +36,7 @@ public class AutoTestCaseServiceImpl implements AutoTestCaseService {
 
         System.out.println(testng.getReporters());
 
-        return new ResponseResult(200,"success","用例执行成功，请等待");
+        return new ResponseResult(200,"success","/Users/yicg/IdeaProjects/ctwork/test-output/index.html");
 
     }
 

@@ -10,6 +10,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ import java.util.Map;
  */
 public class HttpClientUtils {
 
+
     /**
      * get请求,不含请求头
      * @param url
@@ -31,6 +33,7 @@ public class HttpClientUtils {
      */
     public static String doGet(String url){
 
+
         HttpGet get=new HttpGet(url);
         DefaultHttpClient client=new DefaultHttpClient();
         try {
@@ -39,13 +42,13 @@ public class HttpClientUtils {
             return result;
         } catch (IOException e) {
             e.printStackTrace();
-            return e.getMessage();
+            return null;
         }
     }
 
     /**
      * get请求,携带请求头
-     * @param url
+     * @param   url
      * @return
      */
     public static String getMethod(String url,Map<String,String> headers){
@@ -53,9 +56,11 @@ public class HttpClientUtils {
         HttpGet get=new HttpGet(url);
         DefaultHttpClient client=new DefaultHttpClient();
         //封装请求头
+        //Collection<Map.Entry<String,String>> entries=headers.entrySet();
         for (Map.Entry<String, String> header : headers.entrySet()){
             get.setHeader(header.getKey(),header.getValue());
         }
+
 
         try {
             HttpResponse response=client.execute(get);
@@ -63,7 +68,7 @@ public class HttpClientUtils {
             return result;
         } catch (IOException e) {
             e.printStackTrace();
-            return e.getMessage();
+            return null;
         }
     }
 
@@ -73,12 +78,12 @@ public class HttpClientUtils {
      * @param param
      * @return
      */
-    public static String postMethod(String url, JSONObject param, Map<String,String> headers){
+    public static String postMethod(String url, JSONObject param, Map<String,String> headers) {
 
         HttpPost post=new HttpPost(url);
         DefaultHttpClient client=new DefaultHttpClient();
         StringEntity entity=new StringEntity(param.toString(),"utf-8");
-        //封装请求头
+        //封装请求头，把map格式遍历出来
         for (Map.Entry<String, String> header : headers.entrySet()){
             post.setHeader(header.getKey(),header.getValue());
         }
@@ -89,8 +94,37 @@ public class HttpClientUtils {
             return result;
         } catch (Exception e) {
             e.printStackTrace();
-            return e.getMessage();
+            return null;
         }
+
+        /**
+         * httpclient4.5.5写法
+         * 可以关闭httpclient
+         */
+
+  /*      CloseableHttpClient httpClient= HttpClients.createDefault();
+        HttpPost post=new HttpPost(url);
+        StringEntity entity=new StringEntity(param.toString(),"utf-8");
+        //封装请求头
+        for (Map.Entry<String, String> header : headers.entrySet()){
+            post.setHeader(header.getKey(),header.getValue());
+        }
+        post.setEntity(entity);
+        try {
+            CloseableHttpResponse response=httpClient.execute(post);
+            String result=EntityUtils.toString(response.getEntity(),"utf-8");
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return e.getMessage();
+        } finally {
+            try {
+                httpClient.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }*/
+
     }
 
     /**
@@ -126,7 +160,7 @@ public class HttpClientUtils {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return e.getMessage();
+            return null;
         }
     }
 

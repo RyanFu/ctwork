@@ -19,6 +19,25 @@ import java.util.Map;
 public class TestQYDatacenter {
 
     private static Logger logger=LoggerFactory.getLogger(TestQYDatacenter.class);
+    //测试地址
+    private static String URL=Const.TEST_WJ_DATA_CENTER_URL;
+
+    //sheet3字段和参数
+    public static String TEST_PARAM_SHEET_003=Const.TEST_SHEET_003;
+    public static String FILE_NAME_SHEET_003="同盾003";
+
+
+    //sheet4字段和参数
+    public static String TEST_PARAM_SHEET_004=Const.TEST_SHEET_004;
+    public static String FILE_NAME_SHEET_004="本地字段004";
+
+    //sheet5字段和参数
+    public static String TEST_PARAM_SHEET_005=Const.TEST_SHEET_005;
+    public static String FILE_NAME_SHEET_005="迁移字段005";
+
+    //sheet6字段和参数
+    public static String TEST_PARAM_SHEET_006=Const.TEST_SHEET_006;
+    public static String FILE_NAME_SHEET_006="优分006";
 
     /**
      * 读取excel文件
@@ -27,8 +46,7 @@ public class TestQYDatacenter {
     public Object[][] excelFile() {
         // 测试数据准备
         String file = Const.QY_DATA_CENTER__PATH;
-       // Object[][] records=ExcelReaderUtils.getExpectationData(file,"优分");
-        Object[][] records=ExcelReaderUtils.getExpectationData(file,"同盾");
+        Object[][] records=ExcelReaderUtils.getExpectationData(file,FILE_NAME_SHEET_006);
         logger.info(records.toString());
         return records ;
     }
@@ -38,10 +56,10 @@ public class TestQYDatacenter {
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
 
-        JSONObject jsonObject =JsonReadUtils.readJsonFile(Const.TD_TEST_JSON_PATH);
+        JSONObject jsonObject =JsonReadUtils.readJsonFile(TEST_PARAM_SHEET_006);
         jsonObject.put("fields",var_name);
 
-        String response = HttpClientUtils.postMethod(Const.test_wj_data_center_url, jsonObject, headers);
+        String response = HttpClientUtils.postMethod(URL, jsonObject, headers);
         JSONObject json=JSON.parseObject(response);
         logger.info(var_name +"--"+desc+"---->" + json.getString("data"));
 

@@ -10,15 +10,6 @@ import java.util.Random;
 public class RandomUtils {
 
     /**
-     * 99999999
-     * 生成随机数工具类
-     */
-    public static int getRandomCode() {
-        Random random = new Random();
-        return random.nextInt(999999999);
-    }
-
-    /**
      * 生成153和8位数随机数组成手机号
      * @return
      */
