@@ -39,6 +39,11 @@ public class TestQYDatacenter {
     public static String TEST_PARAM_SHEET_006=Const.TEST_SHEET_006;
     public static String FILE_NAME_SHEET_006="优分006";
 
+    //sheet7字段和参数
+    public static String TEST_PARAM_SHEET_007=Const.TEST_SHEET_007;
+    public static String FILE_NAME_SHEET_007="sheet7";
+
+
     /**
      * 读取excel文件
      */
@@ -46,7 +51,7 @@ public class TestQYDatacenter {
     public Object[][] excelFile() {
         // 测试数据准备
         String file = Const.QY_DATA_CENTER__PATH;
-        Object[][] records=ExcelReaderUtils.getExpectationData(file,FILE_NAME_SHEET_006);
+        Object[][] records=ExcelReaderUtils.getExpectationData(file,FILE_NAME_SHEET_007);
         logger.info(records.toString());
         return records ;
     }
@@ -56,7 +61,7 @@ public class TestQYDatacenter {
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
 
-        JSONObject jsonObject =JsonReadUtils.readJsonFile(TEST_PARAM_SHEET_006);
+        JSONObject jsonObject =JsonReadUtils.readJsonFile(TEST_PARAM_SHEET_007);
         jsonObject.put("fields",var_name);
 
         String response = HttpClientUtils.postMethod(URL, jsonObject, headers);

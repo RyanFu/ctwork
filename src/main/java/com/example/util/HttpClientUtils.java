@@ -61,7 +61,6 @@ public class HttpClientUtils {
             get.setHeader(header.getKey(),header.getValue());
         }
 
-
         try {
             HttpResponse response=client.execute(get);
             String result=EntityUtils.toString(response.getEntity(),"utf-8");

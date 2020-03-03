@@ -43,6 +43,10 @@ public class ProdQYDataCenter {
     public static String PROD_PARAM_SHEET_006=Const.PROD_SHEET_006;
     public static String FILE_NAME_SHEET_006="优分006";
 
+    //sheet6字段和参数
+    public static String PROD_PARAM_SHEET_007=Const.PROD_SHEET_007;
+    public static String FILE_NAME_SHEET_007="sheet7";
+
     /**
      * 读取excel文件
      */
@@ -51,7 +55,7 @@ public class ProdQYDataCenter {
         // 测试数据准备
         String file = Const.QY_DATA_CENTER__PATH;
 
-        Object[][] records=ExcelReaderUtils.getExpectationData(file,FILE_NAME_SHEET_006);
+        Object[][] records=ExcelReaderUtils.getExpectationData(file,FILE_NAME_SHEET_007);
 
         return records ;
     }
@@ -62,7 +66,7 @@ public class ProdQYDataCenter {
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
 
-        com.alibaba.fastjson.JSONObject jsonObject =JsonReadUtils.readJsonFile(PROD_PARAM_SHEET_006);
+        com.alibaba.fastjson.JSONObject jsonObject =JsonReadUtils.readJsonFile(PROD_PARAM_SHEET_007);
         jsonObject.put("fields",var_name);
 
         String response = HttpClientUtils.postMethod(URL, jsonObject, headers);
