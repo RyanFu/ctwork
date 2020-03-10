@@ -1,6 +1,7 @@
 package com.example.ctwork.datacenter;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.example.common.Const;
 import com.example.util.ExcelReaderUtils;
 import com.example.util.HttpClientUtils;
@@ -47,6 +48,11 @@ public class ProdQYDataCenter {
     public static String PROD_PARAM_SHEET_007=Const.PROD_SHEET_007;
     public static String FILE_NAME_SHEET_007="sheet7";
 
+    //sheet7字段和参数
+    public static String PROD_PARAM_SHEET_008=Const.PROD_SHEET_008;
+    public static String FILE_NAME_SHEET_008="颜值贷0304";
+
+
     /**
      * 读取excel文件
      */
@@ -55,7 +61,7 @@ public class ProdQYDataCenter {
         // 测试数据准备
         String file = Const.QY_DATA_CENTER__PATH;
 
-        Object[][] records=ExcelReaderUtils.getExpectationData(file,FILE_NAME_SHEET_007);
+        Object[][] records=ExcelReaderUtils.getExpectationData(file,FILE_NAME_SHEET_008);
 
         return records ;
     }
@@ -66,11 +72,11 @@ public class ProdQYDataCenter {
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
 
-        com.alibaba.fastjson.JSONObject jsonObject =JsonReadUtils.readJsonFile(PROD_PARAM_SHEET_007);
+        JSONObject jsonObject =JsonReadUtils.readJsonFile(PROD_PARAM_SHEET_008);
         jsonObject.put("fields",var_name);
 
         String response = HttpClientUtils.postMethod(URL, jsonObject, headers);
-        com.alibaba.fastjson.JSONObject json=JSON.parseObject(response);
+        JSONObject json=JSON.parseObject(response);
 
         logger.info(var_name +"--"+desc+"---->" + json.get("data"));
 

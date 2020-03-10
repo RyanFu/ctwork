@@ -30,6 +30,7 @@ public class Const {
     public static final String TEST_SHEET_005="/Users/yicg/IdeaProjects/ctwork/src/main/json/testparam/TEST_SHEET_005.json";
     public static final String TEST_SHEET_006="/Users/yicg/IdeaProjects/ctwork/src/main/json/testparam/TEST_SHEET_006.json";
     public static final String TEST_SHEET_007="/Users/yicg/IdeaProjects/ctwork/src/main/json/testparam/TEST_SHEET_007.json";
+    public static final String TEST_SHEET_008="/Users/yicg/IdeaProjects/ctwork/src/main/json/testparam/TEST_SHEET_008.json";
 
 
 
@@ -40,6 +41,7 @@ public class Const {
     public static final String PROD_SHEET_005="/Users/yicg/IdeaProjects/ctwork/src/main/json/prodparam/PROD_SHEET_005.json";
     public static final String PROD_SHEET_006="/Users/yicg/IdeaProjects/ctwork/src/main/json/prodparam/PROD_SHEET_006.json";
     public static final String PROD_SHEET_007="/Users/yicg/IdeaProjects/ctwork/src/main/json/prodparam/PROD_SHEET_007.json";
+    public static final String PROD_SHEET_008="/Users/yicg/IdeaProjects/ctwork/src/main/json/prodparam/PROD_SHEET_008.json";
 
 
 

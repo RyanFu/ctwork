@@ -1,0 +1,22 @@
+{
+	"inFields": {
+		"PHONENUM": "18398201352",
+		"IDCARD": "513701199703166540",
+		"NAME": "何琴",
+		"TRAFFIC":"JUMEI",
+		"PRODUCT":"1",
+		"CONTACTPHONENUMS":"18398201352",
+		"CONTACNAME":"何琴",
+		"TYPE":1,
+		"IP":"127.0.0.1",
+		"CYCLE":"6",
+		"LOANTYPE": "2",
+		"TID":"5f0a7dc291ec407f90bbe2d60f0498c6",
+		"UID":"83284044",
+		"engineCode": "qaz1234",
+		"USER_SELLER_NO":"8326CE1095447C919E39D0BD569C06C2"
+	},
+	"pid": "213",
+	"uid": "3343333",
+	"organId": "12311"
+}
