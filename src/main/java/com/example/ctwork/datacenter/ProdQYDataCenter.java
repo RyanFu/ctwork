@@ -44,13 +44,17 @@ public class ProdQYDataCenter {
     public static String PROD_PARAM_SHEET_006=Const.PROD_SHEET_006;
     public static String FILE_NAME_SHEET_006="优分006";
 
-    //sheet6字段和参数
+    //sheet7字段和参数
     public static String PROD_PARAM_SHEET_007=Const.PROD_SHEET_007;
     public static String FILE_NAME_SHEET_007="sheet7";
 
-    //sheet7字段和参数
+    //sheet8字段和参数
     public static String PROD_PARAM_SHEET_008=Const.PROD_SHEET_008;
     public static String FILE_NAME_SHEET_008="颜值贷0304";
+
+    //sheet9字段和参数
+    public static String PROD_PARAM_SHEET_009=Const.PROD_SHEET_009;
+    public static String FILE_NAME_SHEET_009="好多数等三方数据字段";
 
 
     /**

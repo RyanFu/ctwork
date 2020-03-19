@@ -3,6 +3,7 @@ package com.example.util;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 
 /**
  * @Author: yicg
@@ -28,6 +29,20 @@ public class MD5Utils {
             md5code = "0" + md5code;
         }
         return md5code;
+    }
+
+
+    public static void main(String[] args) {
+        String date=DateTimeUtils.formatDateTime(new Date(),"yyyyMMddHHmmssSSS");
+        String phoneMD5=md5("1811435305");
+        String reqId=date+phoneMD5;
+
+        String s="P7N8Tbh4E2oncpfXf89Lt8DG7Legw1z0"+"&"+reqId+"&"+date;
+        String sign=md5(s);
+        System.out.println("phoneMD5="+phoneMD5);
+        System.out.println("time="+date);
+        System.out.println("reqId="+reqId);
+        System.out.println("sign="+sign);
     }
 
 }
