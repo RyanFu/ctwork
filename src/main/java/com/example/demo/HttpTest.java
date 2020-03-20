@@ -2,7 +2,7 @@ package com.example.demo;
 
 import com.example.common.CaseNameEnum;
 import com.example.enums.CaseEnum;
-import com.example.pojo.AutoTestCase;
+import com.example.model.AutoTestCase;
 import com.example.util.DatabaseUtil;
 import com.example.util.HttpUtils;
 import com.example.util.JsonUtils;

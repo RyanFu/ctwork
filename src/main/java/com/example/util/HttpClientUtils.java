@@ -1,6 +1,7 @@
 package com.example.util;
 
 import com.alibaba.fastjson.JSONObject;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -23,6 +24,7 @@ import java.util.Map;
  *
  * httpclient工具类
  */
+@Slf4j
 public class HttpClientUtils {
 
 
@@ -162,6 +164,7 @@ public class HttpClientUtils {
             return null;
         }
     }
+
 
 
 }

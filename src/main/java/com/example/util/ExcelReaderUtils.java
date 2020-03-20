@@ -1,12 +1,14 @@
 package com.example.util;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.FileInputStream;
+import java.io.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.List;
 /**
  * 读取excel文件并解析
  */
+@Slf4j
 public class ExcelReaderUtils {
 
     public static XSSFSheet ExcelWSheet;
@@ -59,11 +62,10 @@ public class ExcelReaderUtils {
 
     }
 
-
     /**
      * 对Excel的各个单元格的格式进行判断并转换
      */
-    public static String getCellValue(XSSFCell xssfCell) {
+    private static String getCellValue(XSSFCell xssfCell) {
         String cellValue = "";
         DecimalFormat df = new DecimalFormat("#");
         switch (xssfCell.getCellType()) {
@@ -84,5 +86,71 @@ public class ExcelReaderUtils {
         }
         return cellValue;
     }
+
+
+    /**
+     *   写入excel
+     * @param list
+     * @param filePath
+     */
+    public static void writeExcel(List<List<String>> list, String filePath) {
+        File file = new File(filePath);
+        String fileName = file.getName();
+        Workbook workbook = null;
+        if (fileName.endsWith("xls")) {
+            log.error("请创建xlsx结尾的文件");
+        } else if (fileName.endsWith("xlsx")) {
+            workbook = xssfWriteExcel(list);
+        }
+        //将文件保存到指定的位置
+        try {
+            OutputStream fos = new FileOutputStream(filePath);
+            workbook.write(fos);
+            //System.out.println("写入成功");
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    /**
+     * 把内容写入Excel
+     *
+     * @param list 传入要写的内容，此处以一个List内容为例，先把要写的内容放到一个list中
+     */
+    private static XSSFWorkbook xssfWriteExcel(List<List<String>> list) {
+        //创建工作簿
+        XSSFWorkbook workbook = new XSSFWorkbook();
+
+        //创建工作表
+        XSSFSheet xssfSheet = workbook.createSheet();
+
+        //创建行
+        XSSFRow xssfRow;
+
+        //创建列，即单元格Cell
+        XSSFCell xssfCell;
+
+        //把List里面的数据写到excel中
+        for (int i = 0; i < list.size(); i++) {
+            //从第一行开始写入
+            xssfRow = xssfSheet.createRow(i);
+            //创建每个单元格Cell，即列的数据
+            List sub_list = list.get(i);
+            for (int j = 0; j < sub_list.size(); j++) {
+                xssfCell = xssfRow.createCell(j); //创建单元格
+                xssfCell.setCellValue((String) sub_list.get(j)); //设置单元格内容
+            }
+        }
+        return workbook;
+
+    }
+
+
+
+
+
 
 }

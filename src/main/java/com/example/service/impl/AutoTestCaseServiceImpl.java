@@ -2,8 +2,8 @@ package com.example.service.impl;
 
 import com.example.common.Const;
 import com.example.dao.AutoTestCaseDao;
-import com.example.pojo.AutoTestCase;
 import com.example.dto.TestDto;
+import com.example.model.AutoTestCase;
 import com.example.service.AutoTestCaseService;
 import com.example.vo.ResponseResult;
 import org.slf4j.Logger;
@@ -36,7 +36,7 @@ public class AutoTestCaseServiceImpl implements AutoTestCaseService {
 
         System.out.println(testng.getReporters());
 
-        return new ResponseResult(200,"success","/Users/yicg/IdeaProjects/ctwork/test-output/index.html");
+        return ResponseResult.successResponse("/Users/yicg/IdeaProjects/ctwork/test-output/index.html");
 
     }
 
@@ -65,7 +65,7 @@ public class AutoTestCaseServiceImpl implements AutoTestCaseService {
                 return new ResponseResult(400, "添加用例失败");
             }
             logger.info("添加案例成功={}", autoTestCase.toString());
-            return new ResponseResult(200, "添加用例成功",autoTestCase);
+            return ResponseResult.successResponse(autoTestCase);
         }
     }
 
@@ -85,16 +85,16 @@ public class AutoTestCaseServiceImpl implements AutoTestCaseService {
             autoTestCase.setParam(testDto.getParamMap().toString());
         }
         if(testDto.getCaseName().equals(null)){
-            return new ResponseResult(400, "用例名称不能为空");
+            return ResponseResult.failResponse("用例名称不能为空");
         }
 
         int i=autoTestCaseDao.updateCaseInfo(autoTestCase);
         if(i==0){
-            return new ResponseResult(400, "修改用例失败");
+            return ResponseResult.failResponse("修改用例失败");
         }else {
             AutoTestCase caseInfo=autoTestCaseDao.selectByCaseName(autoTestCase.getCaseName());
             logger.info("修改用例={}",caseInfo);
-            return new ResponseResult(200, "修改用例成功",caseInfo);
+            return ResponseResult.successResponse(caseInfo);
         }
 
     }
@@ -102,7 +102,7 @@ public class AutoTestCaseServiceImpl implements AutoTestCaseService {
     @Override
     public ResponseResult selectAutoTestCase() {
         List<AutoTestCase> list=autoTestCaseDao.getAllAutoTestCase();
-        return new ResponseResult(200,"success",list);
+        return ResponseResult.successResponse(list);
     }
 
 

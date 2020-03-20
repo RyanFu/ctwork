@@ -1,4 +1,4 @@
-package com.example.pojo;
+package com.example.model;
 
 import lombok.Data;
 import java.util.Date;

@@ -1,6 +1,6 @@
 package com.example.dao;
 
-import com.example.pojo.AutoTestCase;
+import com.example.model.AutoTestCase;
 
 import java.util.List;
 

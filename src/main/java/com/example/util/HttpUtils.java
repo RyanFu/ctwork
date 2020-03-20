@@ -1,5 +1,6 @@
 package com.example.util;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.CookieStore;
@@ -12,13 +13,17 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
  * Http工具类
  */
+@Slf4j
 public class HttpUtils {
 
     public static CookieStore cookieStore;
@@ -81,6 +86,40 @@ public class HttpUtils {
             e.printStackTrace();
             return e.getMessage();
         }
+    }
+
+
+
+
+
+
+    /**
+     * 替换模版参数
+     *
+     * @param bodyPattern
+     * @param param
+     * @return
+     */
+    public static String makeParamter(String bodyPattern, Map<String, String> param, HashMap<String, String> converMap) {
+
+        List<String> ls = new ArrayList<String>();
+        Pattern pattern = Pattern.compile("(\\$\\{[^\\}]+})");
+        Matcher matcher = pattern.matcher(bodyPattern);
+        while (matcher.find()) {
+            String key = matcher.group();
+            String convertKey = converMap.get(formatParamCode(key));
+            log.info(" body pattern key = " + key + " convert to  " + convertKey);
+            convertKey = (convertKey == null ? key : convertKey);
+            String value = param.get(convertKey);
+            bodyPattern = bodyPattern.replace(key, value == null ? "" : value);
+        }
+
+
+        return bodyPattern;
+    }
+
+    public static String formatParamCode(String paramCode) {
+        return paramCode.replaceAll("\\$", "").replaceAll("\\{", "").replaceAll("\\}", "");
     }
 
 }

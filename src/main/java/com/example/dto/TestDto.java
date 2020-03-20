@@ -1,11 +1,16 @@
 package com.example.dto;
 
-import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
+import org.json.JSONObject;
 
-
+/**
+ * @author yicg
+ * @createTime 2020年03月20日 11:12:00
+ * @Description
+ */
 @Data
 public class TestDto {
+
 
     private String caseName;
 

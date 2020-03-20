@@ -10,23 +10,23 @@
     </update>
 
     <!--查询所有case-->
-    <select id="findAll" resultType="com.example.pojo.AutoTestCase">
+    <select id="findAll" resultType="com.example.model.AutoTestCase">
         select * from auto_test_case;
     </select>
 
     <!--通过case_name查询记录-->
-    <select id="findByCaseName" parameterType="string" resultType="com.example.pojo.AutoTestCase">
+    <select id="findByCaseName" parameterType="string" resultType="com.example.model.AutoTestCase">
         select * from auto_test_case where case_name=#{caseName};
     </select>
 
     <!--通过id去查询case-->
-    <select id="findById" parameterType="int" resultType="com.example.pojo.AutoTestCase">
+    <select id="findById" parameterType="int" resultType="com.example.model.AutoTestCase">
         select * from auto_test_case where id=#{id};
     </select>
 
     <!--修改case的执行状态-->
 
-    <update id="updateState" parameterType="com.example.pojo.AutoTestCase">
+    <update id="updateState" parameterType="com.example.model.AutoTestCase">
         update auto_test_case set state=#{state} ,actual_result=#{actualResult} where case_name=#{caseName};
     </update>
 </mapper>
