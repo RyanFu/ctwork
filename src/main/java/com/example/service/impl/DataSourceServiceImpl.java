@@ -7,7 +7,6 @@ import com.example.common.Const;
 import com.example.common.FeatureComponent;
 import com.example.common.TmpParam;
 import com.example.dao.DataSourceMapper;
-import com.example.model.DataSource;
 import com.example.model.DataSourceWithBLOBs;
 import com.example.service.DataSourceService;
 import com.example.util.ExcelReaderUtils;
@@ -79,45 +78,8 @@ public class DataSourceServiceImpl implements DataSourceService {
 
     @Override
     public ResponseResult getAllDataSource() {
-        List<String> list=Lists.newArrayList();
-        JSONObject result=null;
 
-        Map<String, String> headers = new HashMap<>();
-        headers.put("Content-Type", "application/json");
-
-        List<DataSourceWithBLOBs> dataSourceWithBLOBs=dataSourceMapper.selectAllDataSource();
-        for (DataSourceWithBLOBs dataSourceWithBLOB:dataSourceWithBLOBs){
-            String serviceCode=dataSourceWithBLOB.getEnName();
-            String url=dataSourceWithBLOB.getUrlPattern();
-            String bodyPattern=dataSourceWithBLOB.getBodyPattern();
-            //通过模版映射的请求参数
-            String reqBody=HttpUtils.makeParamter(bodyPattern,TmpParam.tmpParam(),FeatureComponent.parameterMaps);
-            JSONObject body=JSON.parseObject(reqBody);
-            log.info("数据源名称 {},获取的参数 {}",serviceCode,body);
-            //判断返回结果是否为空
-            String response=HttpClientUtils.postMethod(url,body,headers);
-            if(StringUtils.isEmpty(response)){
-                log.error("数据源名称 {},数据源请求失败 {}",serviceCode,response);
-                return ResponseResult.failResponse(response);
-            }
-            list.add(serviceCode);
-            list.add(url);
-            list.add(reqBody);
-            list.add(response);
-            //获取当前时间
-            SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String data=sf.format(new Date());
-            list.add(data);
-            List<List<String>> lists=Lists.newArrayList();
-            lists.add(list);
-            //调用写入excel方法
-            String excel_path=Const.BASE_PATH+ "/result_excel/result.xlsx";
-            ExcelReaderUtils.writeExcel(lists,excel_path);
-            result=JSON.parseObject(response);
-            log.info("数据源名称 {},数据源返回结果 {}",serviceCode,result);
-        }
-
-        return ResponseResult.successResponse(result);
+      return null;
     }
 
 
