@@ -44,6 +44,6 @@ public class ChannelOcrInfoServiceImpl implements ChannelOcrInfoService {
 
         }
 
-        return ResponseResult.successResponse("脚本结束");
+        return ResponseResult.createBySuccess("脚本结束");
     }
 }

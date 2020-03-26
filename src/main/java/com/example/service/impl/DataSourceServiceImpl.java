@@ -55,7 +55,7 @@ public class DataSourceServiceImpl implements DataSourceService {
         String response=HttpClientUtils.postMethod(url,body,headers);
         if(StringUtils.isEmpty(response)){
             log.error("数据源名称 {},数据源请求失败 {}",serviceCode,response);
-            return ResponseResult.failResponse(response);
+            return ResponseResult.createByError(response);
         }
         list.add(serviceCode);
         list.add(url);
@@ -72,7 +72,7 @@ public class DataSourceServiceImpl implements DataSourceService {
         ExcelReaderUtils.writeExcel(lists,excel_path);
         JSONObject result=JSON.parseObject(response);
         log.info("数据源名称 {},数据源返回结果 {}",serviceCode,result);
-        return ResponseResult.successResponse(result);
+        return ResponseResult.createBySuccess(result);
 
     }
 

@@ -7,13 +7,10 @@ import com.example.util.RandomUtils;
 import com.example.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * @author yicg
@@ -63,7 +60,7 @@ public class ChannelUserInfoServiceImpl implements ChannelUserInfoService {
 
         channelUserInfoMapper.updateAll(channelUserInfo);
 
-        return ResponseResult.successResponse("脚本执行完成");
+        return ResponseResult.createBySuccess("脚本执行完成");
     }
 
 
@@ -175,7 +172,7 @@ public class ChannelUserInfoServiceImpl implements ChannelUserInfoService {
             relationInfoMapper.insertSelective(relationInfo2);
         }
 
-        return ResponseResult.successResponse("执行成功");
+        return ResponseResult.createBySuccess("执行成功");
     }
 
 

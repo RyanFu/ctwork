@@ -36,7 +36,7 @@ public class AutoTestCaseServiceImpl implements AutoTestCaseService {
 
         System.out.println(testng.getReporters());
 
-        return ResponseResult.successResponse("/Users/yicg/IdeaProjects/ctwork/test-output/index.html");
+        return ResponseResult.createBySuccess("/Users/yicg/IdeaProjects/ctwork/test-output/index.html");
 
     }
 
@@ -65,7 +65,7 @@ public class AutoTestCaseServiceImpl implements AutoTestCaseService {
                 return new ResponseResult(400, "添加用例失败");
             }
             logger.info("添加案例成功={}", autoTestCase.toString());
-            return ResponseResult.successResponse(autoTestCase);
+            return ResponseResult.createBySuccess(autoTestCase);
         }
     }
 
@@ -85,16 +85,16 @@ public class AutoTestCaseServiceImpl implements AutoTestCaseService {
             autoTestCase.setParam(testDto.getParamMap().toString());
         }
         if(testDto.getCaseName().equals(null)){
-            return ResponseResult.failResponse("用例名称不能为空");
+            return ResponseResult.createByError("用例名称不能为空");
         }
 
         int i=autoTestCaseDao.updateCaseInfo(autoTestCase);
         if(i==0){
-            return ResponseResult.failResponse("修改用例失败");
+            return ResponseResult.createByError("修改用例失败");
         }else {
             AutoTestCase caseInfo=autoTestCaseDao.selectByCaseName(autoTestCase.getCaseName());
             logger.info("修改用例={}",caseInfo);
-            return ResponseResult.successResponse(caseInfo);
+            return ResponseResult.createBySuccess(caseInfo);
         }
 
     }
@@ -102,7 +102,7 @@ public class AutoTestCaseServiceImpl implements AutoTestCaseService {
     @Override
     public ResponseResult selectAutoTestCase() {
         List<AutoTestCase> list=autoTestCaseDao.getAllAutoTestCase();
-        return ResponseResult.successResponse(list);
+        return ResponseResult.createBySuccess(list);
     }
 
 
