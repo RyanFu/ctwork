@@ -1,8 +1,11 @@
 package com.example.util;
 
+import org.testng.annotations.Test;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -43,6 +46,11 @@ public class MD5Utils {
         System.out.println("time="+date);
         System.out.println("reqId="+reqId);
         System.out.println("sign="+sign);
+    }
+
+    @Test
+    public void test(){
+
     }
 
 }

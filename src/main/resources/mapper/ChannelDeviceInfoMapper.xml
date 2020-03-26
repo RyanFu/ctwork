@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.dao.ChannelDeviceInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.example.model.ChannelDeviceInfo" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="uid" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ip" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="imei" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="internet_type" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="wifi_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="wifi_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="latitude" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="longitude" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="mac" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="phone_model" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="phone_marker" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="os" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="available_capacity" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="memory" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="is_root" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="resolution" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="traffic_code" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="product_code" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="node" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="apply_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="version" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, uid, ip, imei, internet_type, wifi_id, wifi_name, latitude, longitude, mac, phone_model, 
+    phone_marker, os, available_capacity, memory, is_root, resolution, traffic_code, 
+    product_code, node, apply_date, version
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from channel_device_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from channel_device_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.example.model.ChannelDeviceInfo" >
+    insert into channel_device_info (id, uid, ip, imei, 
+      internet_type, wifi_id, wifi_name, 
+      latitude, longitude, mac, 
+      phone_model, phone_marker, os, 
+      available_capacity, memory, is_root, 
+      resolution, traffic_code, product_code, 
+      node, apply_date, version
+      )
+    values (#{id,jdbcType=BIGINT}, #{uid,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{imei,jdbcType=VARCHAR}, 
+      #{internetType,jdbcType=VARCHAR}, #{wifiId,jdbcType=VARCHAR}, #{wifiName,jdbcType=VARCHAR}, 
+      #{latitude,jdbcType=DOUBLE}, #{longitude,jdbcType=DOUBLE}, #{mac,jdbcType=VARCHAR}, 
+      #{phoneModel,jdbcType=VARCHAR}, #{phoneMarker,jdbcType=VARCHAR}, #{os,jdbcType=VARCHAR}, 
+      #{availableCapacity,jdbcType=VARCHAR}, #{memory,jdbcType=VARCHAR}, #{isRoot,jdbcType=VARCHAR}, 
+      #{resolution,jdbcType=VARCHAR}, #{trafficCode,jdbcType=VARCHAR}, #{productCode,jdbcType=VARCHAR}, 
+      #{node,jdbcType=INTEGER}, #{applyDate,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.model.ChannelDeviceInfo" >
+    insert into channel_device_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="imei != null" >
+        imei,
+      </if>
+      <if test="internetType != null" >
+        internet_type,
+      </if>
+      <if test="wifiId != null" >
+        wifi_id,
+      </if>
+      <if test="wifiName != null" >
+        wifi_name,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="mac != null" >
+        mac,
+      </if>
+      <if test="phoneModel != null" >
+        phone_model,
+      </if>
+      <if test="phoneMarker != null" >
+        phone_marker,
+      </if>
+      <if test="os != null" >
+        os,
+      </if>
+      <if test="availableCapacity != null" >
+        available_capacity,
+      </if>
+      <if test="memory != null" >
+        memory,
+      </if>
+      <if test="isRoot != null" >
+        is_root,
+      </if>
+      <if test="resolution != null" >
+        resolution,
+      </if>
+      <if test="trafficCode != null" >
+        traffic_code,
+      </if>
+      <if test="productCode != null" >
+        product_code,
+      </if>
+      <if test="node != null" >
+        node,
+      </if>
+      <if test="applyDate != null" >
+        apply_date,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="imei != null" >
+        #{imei,jdbcType=VARCHAR},
+      </if>
+      <if test="internetType != null" >
+        #{internetType,jdbcType=VARCHAR},
+      </if>
+      <if test="wifiId != null" >
+        #{wifiId,jdbcType=VARCHAR},
+      </if>
+      <if test="wifiName != null" >
+        #{wifiName,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="mac != null" >
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneModel != null" >
+        #{phoneModel,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneMarker != null" >
+        #{phoneMarker,jdbcType=VARCHAR},
+      </if>
+      <if test="os != null" >
+        #{os,jdbcType=VARCHAR},
+      </if>
+      <if test="availableCapacity != null" >
+        #{availableCapacity,jdbcType=VARCHAR},
+      </if>
+      <if test="memory != null" >
+        #{memory,jdbcType=VARCHAR},
+      </if>
+      <if test="isRoot != null" >
+        #{isRoot,jdbcType=VARCHAR},
+      </if>
+      <if test="resolution != null" >
+        #{resolution,jdbcType=VARCHAR},
+      </if>
+      <if test="trafficCode != null" >
+        #{trafficCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productCode != null" >
+        #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="node != null" >
+        #{node,jdbcType=INTEGER},
+      </if>
+      <if test="applyDate != null" >
+        #{applyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.model.ChannelDeviceInfo" >
+    update channel_device_info
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="imei != null" >
+        imei = #{imei,jdbcType=VARCHAR},
+      </if>
+      <if test="internetType != null" >
+        internet_type = #{internetType,jdbcType=VARCHAR},
+      </if>
+      <if test="wifiId != null" >
+        wifi_id = #{wifiId,jdbcType=VARCHAR},
+      </if>
+      <if test="wifiName != null" >
+        wifi_name = #{wifiName,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="mac != null" >
+        mac = #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneModel != null" >
+        phone_model = #{phoneModel,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneMarker != null" >
+        phone_marker = #{phoneMarker,jdbcType=VARCHAR},
+      </if>
+      <if test="os != null" >
+        os = #{os,jdbcType=VARCHAR},
+      </if>
+      <if test="availableCapacity != null" >
+        available_capacity = #{availableCapacity,jdbcType=VARCHAR},
+      </if>
+      <if test="memory != null" >
+        memory = #{memory,jdbcType=VARCHAR},
+      </if>
+      <if test="isRoot != null" >
+        is_root = #{isRoot,jdbcType=VARCHAR},
+      </if>
+      <if test="resolution != null" >
+        resolution = #{resolution,jdbcType=VARCHAR},
+      </if>
+      <if test="trafficCode != null" >
+        traffic_code = #{trafficCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productCode != null" >
+        product_code = #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="node != null" >
+        node = #{node,jdbcType=INTEGER},
+      </if>
+      <if test="applyDate != null" >
+        apply_date = #{applyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.model.ChannelDeviceInfo" >
+    update channel_device_info
+    set uid = #{uid,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      imei = #{imei,jdbcType=VARCHAR},
+      internet_type = #{internetType,jdbcType=VARCHAR},
+      wifi_id = #{wifiId,jdbcType=VARCHAR},
+      wifi_name = #{wifiName,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=DOUBLE},
+      longitude = #{longitude,jdbcType=DOUBLE},
+      mac = #{mac,jdbcType=VARCHAR},
+      phone_model = #{phoneModel,jdbcType=VARCHAR},
+      phone_marker = #{phoneMarker,jdbcType=VARCHAR},
+      os = #{os,jdbcType=VARCHAR},
+      available_capacity = #{availableCapacity,jdbcType=VARCHAR},
+      memory = #{memory,jdbcType=VARCHAR},
+      is_root = #{isRoot,jdbcType=VARCHAR},
+      resolution = #{resolution,jdbcType=VARCHAR},
+      traffic_code = #{trafficCode,jdbcType=VARCHAR},
+      product_code = #{productCode,jdbcType=VARCHAR},
+      node = #{node,jdbcType=INTEGER},
+      apply_date = #{applyDate,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateByUid" parameterType="com.example.model.ChannelDeviceInfo" >
+    update channel_device_info
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="imei != null" >
+        imei = #{imei,jdbcType=VARCHAR},
+      </if>
+      <if test="internetType != null" >
+        internet_type = #{internetType,jdbcType=VARCHAR},
+      </if>
+      <if test="wifiId != null" >
+        wifi_id = #{wifiId,jdbcType=VARCHAR},
+      </if>
+      <if test="wifiName != null" >
+        wifi_name = #{wifiName,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="mac != null" >
+        mac = #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneModel != null" >
+        phone_model = #{phoneModel,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneMarker != null" >
+        phone_marker = #{phoneMarker,jdbcType=VARCHAR},
+      </if>
+      <if test="os != null" >
+        os = #{os,jdbcType=VARCHAR},
+      </if>
+      <if test="availableCapacity != null" >
+        available_capacity = #{availableCapacity,jdbcType=VARCHAR},
+      </if>
+      <if test="memory != null" >
+        memory = #{memory,jdbcType=VARCHAR},
+      </if>
+      <if test="isRoot != null" >
+        is_root = #{isRoot,jdbcType=VARCHAR},
+      </if>
+      <if test="resolution != null" >
+        resolution = #{resolution,jdbcType=VARCHAR},
+      </if>
+      <if test="trafficCode != null" >
+        traffic_code = #{trafficCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productCode != null" >
+        product_code = #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="node != null" >
+        node = #{node,jdbcType=INTEGER},
+      </if>
+      <if test="applyDate != null" >
+        apply_date = #{applyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=INTEGER},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByUid" parameterType="string" resultType="com.example.model.ChannelDeviceInfo">
+      select
+      <include refid="Base_Column_List"/>
+      from channel_device_info
+      where version=1
+      and  uid=#{uid}
+      order by apply_date desc LIMIT 1
+  </select>
+
+</mapper>
