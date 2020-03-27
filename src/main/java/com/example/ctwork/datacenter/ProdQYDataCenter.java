@@ -27,22 +27,7 @@ public class ProdQYDataCenter {
     //线上地址
     private static String URL=Const.PRO_WJ_DATA_CENTER_URL;
 
-    //sheet3字段和参数
-    public static String PROD_PARAM_SHEET_003=Const.PROD_SHEET_003;
-    public static String FILE_NAME_SHEET_003="同盾003";
 
-
-    //sheet4字段和参数
-    public static String PROD_PARAM_SHEET_004=Const.PROD_SHEET_004;
-    public static String FILE_NAME_SHEET_004="本地字段004";
-
-    //sheet5字段和参数
-    public static String PROD_PARAM_SHEET_005=Const.PROD_SHEET_005;
-    public static String FILE_NAME_SHEET_005="迁移字段005";
-
-    //sheet6字段和参数
-    public static String PROD_PARAM_SHEET_006=Const.PROD_SHEET_006;
-    public static String FILE_NAME_SHEET_006="优分006";
 
     //sheet7字段和参数
     public static String PROD_PARAM_SHEET_007=Const.PROD_SHEET_007;
