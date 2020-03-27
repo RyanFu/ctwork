@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 命名空间mapper,如果有多个mapper文件，这个必须唯一 -->
-<mapper namespace="com.example.dao.AutoTestCaseDao">
+<mapper namespace="com.example.dao.second.AutoTestCaseDao">
 
     <!--通过用例名字去查询用例-->
     <select id="selectByCaseName" parameterType="string" resultType="com.example.model.AutoTestCase">

@@ -1,4 +1,4 @@
-package com.example.dao;
+package com.example.dao.master;
 
 import com.example.model.ChannelRelationInfo;
 import org.apache.ibatis.annotations.Param;

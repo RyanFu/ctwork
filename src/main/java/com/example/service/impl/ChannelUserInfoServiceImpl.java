@@ -1,6 +1,6 @@
 package com.example.service.impl;
 
-import com.example.dao.*;
+import com.example.dao.master.*;
 import com.example.model.*;
 import com.example.service.ChannelUserInfoService;
 import com.example.util.RandomUtils;

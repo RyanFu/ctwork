@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.dao.ChannelBankInfoMapper" >
+<mapper namespace="com.example.dao.master.ChannelBankInfoMapper" >
   <resultMap id="BaseResultMap" type="com.example.model.ChannelBankInfo" >
     <constructor >
       <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />

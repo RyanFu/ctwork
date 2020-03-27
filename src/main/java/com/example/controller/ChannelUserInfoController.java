@@ -1,6 +1,5 @@
 package com.example.controller;
 
-import com.example.dao.ChannelUserInfoMapper;
 import com.example.service.ChannelUserInfoService;
 import com.example.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;

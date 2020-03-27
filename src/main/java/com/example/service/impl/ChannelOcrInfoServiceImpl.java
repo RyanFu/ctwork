@@ -1,7 +1,7 @@
 package com.example.service.impl;
 
-import com.example.dao.ChannelOcrInfoMapper;
-import com.example.dao.ChannelUserInfoMapper;
+import com.example.dao.master.ChannelOcrInfoMapper;
+import com.example.dao.master.ChannelUserInfoMapper;
 import com.example.model.ChannelOcrInfoWithBLOBs;
 import com.example.model.ChannelUserInfo;
 import com.example.service.ChannelOcrInfoService;

@@ -21,15 +21,11 @@ public class Const {
 
 
 
-
     //数据中心迁移数据
     public static final String QY_DATA_CENTER__PATH=BASE_PATH+"/src/main/TestData/数据迁移.xlsx";
 
 
     //测试地址参数存放地址
-    public static final String TEST_SHEET_003=BASE_PATH+"/src/main/json/testparam/TEST_SHEET_003.json";
-    public static final String TEST_SHEET_004=BASE_PATH+"/src/main/json/testparam/TEST_SHEET_004.json";
-    public static final String TEST_SHEET_005=BASE_PATH+"/src/main/json/testparam/TEST_SHEET_005.json";
     public static final String TEST_SHEET_006=BASE_PATH+"/src/main/json/testparam/TEST_SHEET_006.json";
     public static final String TEST_SHEET_007=BASE_PATH+"/src/main/json/testparam/TEST_SHEET_007.json";
     public static final String TEST_SHEET_008=BASE_PATH+"/src/main/json/testparam/TEST_SHEET_008.json";
@@ -41,11 +37,7 @@ public class Const {
 
 
 
-
     //线上参数存放路径
-    public static final String PROD_SHEET_003=BASE_PATH+"/src/main/json/prodparam/PROD_SHEET_003.json";
-    public static final String PROD_SHEET_004=BASE_PATH+"/src/main/json/prodparam/PROD_SHEET_004.json";
-    public static final String PROD_SHEET_005=BASE_PATH+"/src/main/json/prodparam/PROD_SHEET_005.json";
     public static final String PROD_SHEET_006=BASE_PATH+"/src/main/json/prodparam/PROD_SHEET_006.json";
     public static final String PROD_SHEET_007=BASE_PATH+"/src/main/json/prodparam/PROD_SHEET_007.json";
     public static final String PROD_SHEET_008=BASE_PATH+"/src/main/json/prodparam/PROD_SHEET_008.json";

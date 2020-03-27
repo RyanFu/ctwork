@@ -1,4 +1,4 @@
-package com.example.dao;
+package com.example.dao.second;
 
 import com.example.model.AutoTestCase;
 

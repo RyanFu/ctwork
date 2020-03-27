@@ -6,6 +6,7 @@ import com.example.common.Const;
 import com.example.util.ExcelReaderUtils;
 import com.example.util.HttpClientUtils;
 import com.example.util.JsonReadUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.DataProvider;
@@ -20,10 +21,9 @@ import java.util.Map;
  * @Description  迁移数据线上回归
  *
  */
-
+@Slf4j
 public class ProdQYDataCenter {
 
-    private static Logger logger=LoggerFactory.getLogger(ProdQYDataCenter.class);
     //线上地址
     private static String URL=Const.PRO_WJ_DATA_CENTER_URL;
 
@@ -65,7 +65,7 @@ public class ProdQYDataCenter {
         // 测试数据准备
         String file = Const.QY_DATA_CENTER__PATH;
 
-        Object[][] records=ExcelReaderUtils.getExpectationData(file,FILE_NAME_SHEET_008);
+        Object[][] records=ExcelReaderUtils.getExpectationData(file,FILE_NAME_SHEET_009);
 
         return records ;
     }
@@ -76,13 +76,13 @@ public class ProdQYDataCenter {
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
 
-        JSONObject jsonObject =JsonReadUtils.readJsonFile(PROD_PARAM_SHEET_008);
+        JSONObject jsonObject =JsonReadUtils.readJsonFile(PROD_PARAM_SHEET_009);
         jsonObject.put("fields",var_name);
 
         String response = HttpClientUtils.postMethod(URL, jsonObject, headers);
         JSONObject json=JSON.parseObject(response);
 
-        logger.info(var_name +"--"+desc+"---->" + json.get("data"));
+        log.info(var_name +"--"+desc+"---->" + json.get("data"));
 
     }
 

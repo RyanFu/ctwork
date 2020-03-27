@@ -1,4 +1,4 @@
-package com.example.dao;
+package com.example.dao.master;
 
 import com.example.model.ChannelOcrInfo;
 import com.example.model.ChannelOcrInfoWithBLOBs;
