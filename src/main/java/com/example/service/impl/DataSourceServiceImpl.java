@@ -6,8 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.common.Const;
 import com.example.common.FeatureComponent;
 import com.example.common.TmpParam;
-import com.example.dao.second.DataSourceMapper;
-import com.example.model.DataSource;
+import com.example.dao.third.DataSourceMapper;
 import com.example.model.DataSourceWithBLOBs;
 import com.example.service.DataSourceService;
 import com.example.util.ExcelReaderUtils;
@@ -75,13 +74,6 @@ public class DataSourceServiceImpl implements DataSourceService {
         log.info("数据源名称 {},数据源返回结果 {}",serviceCode,result);
         return ResponseResult.createBySuccess(result);
 
-    }
-
-    @Override
-    public ResponseResult getAllDataSource() {
-        List<DataSourceWithBLOBs> list=dataSourceMapper.selectAllDataSource();
-
-        return ResponseResult.createBySuccess(list);
     }
 
 

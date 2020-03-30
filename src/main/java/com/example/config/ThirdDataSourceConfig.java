@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
@@ -16,33 +15,32 @@ import javax.sql.DataSource;
 
 /**
  * @author yicg
- * @createTime 2020年03月27日 11:49:00
+ * @createTime 2020年03月27日 14:36:00
  * @Description
  */
 @Configuration
 // 扫描 Mapper 接口并容器管理
-@MapperScan(basePackages = MasterDataSourceConfig.PACKAGE, sqlSessionFactoryRef = "masterSqlSessionFactory")
-public class MasterDataSourceConfig {
+@MapperScan(basePackages = ThirdDataSourceConfig.PACKAGE, sqlSessionFactoryRef = "thirdSqlSessionFactory")
+public class ThirdDataSourceConfig {
 
-    // 精确到 master 目录，以便跟其他数据源隔离
-    static final String PACKAGE = "com.example.dao.master";
-    static final String MAPPER_LOCATION = "classpath:mapper/master/*.xml";
+    // 精确到 cluster 目录，以便跟其他数据源隔离
+    static final String PACKAGE = "com.example.dao.third";
+    static final String MAPPER_LOCATION = "classpath:mapper/third/*.xml";
 
-    @Value("${master.spring.datasource.url}")
+    @Value("${third.spring.datasource.url}")
     private String url;
 
-    @Value("${master.spring.datasource.username}")
+    @Value("${third.spring.datasource.username}")
     private String user;
 
-    @Value("${master.spring.datasource.password}")
+    @Value("${third.spring.datasource.password}")
     private String password;
 
-    @Value("${master.spring.datasource.driverClassName}")
+    @Value("${third.spring.datasource.driverClassName}")
     private String driverClass;
 
-    @Bean(name = "masterDataSource")
-    @Primary
-    public DataSource masterDataSource() {
+    @Bean(name = "thirdDataSource")
+    public DataSource clusterDataSource() {
         DruidDataSource dataSource = new DruidDataSource();
         dataSource.setDriverClassName(driverClass);
         dataSource.setUrl(url);
@@ -51,22 +49,20 @@ public class MasterDataSourceConfig {
         return dataSource;
     }
 
-    @Bean(name = "masterTransactionManager")
-    @Primary
-    public DataSourceTransactionManager masterTransactionManager() {
-        return new DataSourceTransactionManager(masterDataSource());
+    @Bean(name = "thirdTransactionManager")
+    public DataSourceTransactionManager clusterTransactionManager() {
+        return new DataSourceTransactionManager(clusterDataSource());
     }
 
-    @Bean(name = "masterSqlSessionFactory")
-    @Primary
-    public SqlSessionFactory masterSqlSessionFactory(@Qualifier("masterDataSource") DataSource masterDataSource) throws Exception {
+    @Bean(name = "thirdSqlSessionFactory")
+    public SqlSessionFactory clusterSqlSessionFactory(@Qualifier("thirdDataSource") DataSource clusterDataSource) throws Exception {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
-        sessionFactory.setDataSource(masterDataSource);
+        sessionFactory.setDataSource(clusterDataSource);
         sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver()
-                .getResources(MasterDataSourceConfig.MAPPER_LOCATION));
+                .getResources(ThirdDataSourceConfig.MAPPER_LOCATION));
 
-        org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
         //开启驼峰命名
+        org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
         configuration.setMapUnderscoreToCamelCase(true);
         sessionFactory.setConfiguration(configuration);
         return sessionFactory.getObject();

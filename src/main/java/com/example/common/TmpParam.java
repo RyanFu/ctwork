@@ -11,7 +11,7 @@ import java.util.UUID;
 /**
  * @author yicg
  * @createTime 2020年03月20日 10:43:00
- * @Description   模版参数
+ * @Description   gateway模版参数
  */
 public class TmpParam {
 
@@ -62,7 +62,7 @@ public class TmpParam {
 
       public static String getValue(String key){
 
-        String path="/Users/yicg/IdeaProjects/ctwork/src/main/json/gateway_param.json";
+        String path=Const.BASE_PATH+"/src/main/json/gateway_param.json";
         JSONObject jsonObject=JsonReadUtils.readJsonFile(path);
         JSONObject inFields=jsonObject.getJSONObject("inFields");
         return inFields.getString(key);

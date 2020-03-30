@@ -7,7 +7,5 @@ public interface DataSourceService {
     ResponseResult getDataSourceByServiceCode(String serviceCode);
 
 
-    ResponseResult getAllDataSource();
-
 
 }

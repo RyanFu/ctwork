@@ -26,8 +26,7 @@
     </environments>
     <!-- 注册映射文件：java对象与数据库之间的xml文件路径！ -->
     <mappers>
-         <mapper resource="mapper/testNGMapper.xml"/>
-         <mapper resource="mapper/dataSourceMapper.xml"/>
+         <mapper resource="mappers/AutoTestCaseMapper.xml"/>
     </mappers>
 
 </configuration>

@@ -8,10 +8,10 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication(exclude = MongoAutoConfiguration.class)
 @EnableAsync
-public class CtworkApplication {
+public class Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(CtworkApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
 }

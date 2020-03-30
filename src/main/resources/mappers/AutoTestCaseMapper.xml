@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.dao.second.AutoTestCaseMapper" >
+  <resultMap id="BaseResultMap" type="com.example.model.AutoTestCase" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="case_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="host" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="port" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="uri" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="method" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="param_type" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="state" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="creat_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.example.model.AutoTestCaseWithBLOBs" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="case_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="host" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="port" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="uri" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="method" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="param_type" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="state" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="creat_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="heads" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="param" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="actual_result" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, case_name, host, port, uri, method, param_type, state, creat_time, update_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    heads, param, actual_result
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from auto_test_case
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from auto_test_case
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.model.AutoTestCaseWithBLOBs" >
+    insert into auto_test_case (id, case_name, host, 
+      port, uri, method, 
+      param_type, state, creat_time, 
+      update_time, heads, param, 
+      actual_result)
+    values (#{id,jdbcType=INTEGER}, #{caseName,jdbcType=VARCHAR}, #{host,jdbcType=VARCHAR}, 
+      #{port,jdbcType=INTEGER}, #{uri,jdbcType=VARCHAR}, #{method,jdbcType=VARCHAR}, 
+      #{paramType,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{creatTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{heads,jdbcType=LONGVARCHAR}, #{param,jdbcType=LONGVARCHAR}, 
+      #{actualResult,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.model.AutoTestCaseWithBLOBs" >
+    insert into auto_test_case
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="caseName != null" >
+        case_name,
+      </if>
+      <if test="host != null" >
+        host,
+      </if>
+      <if test="port != null" >
+        port,
+      </if>
+      <if test="uri != null" >
+        uri,
+      </if>
+      <if test="method != null" >
+        method,
+      </if>
+      <if test="paramType != null" >
+        param_type,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="creatTime != null" >
+        creat_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="heads != null" >
+        heads,
+      </if>
+      <if test="param != null" >
+        param,
+      </if>
+      <if test="actualResult != null" >
+        actual_result,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="caseName != null" >
+        #{caseName,jdbcType=VARCHAR},
+      </if>
+      <if test="host != null" >
+        #{host,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null" >
+        #{port,jdbcType=INTEGER},
+      </if>
+      <if test="uri != null" >
+        #{uri,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null" >
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="paramType != null" >
+        #{paramType,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null" >
+        #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="heads != null" >
+        #{heads,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="param != null" >
+        #{param,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="actualResult != null" >
+        #{actualResult,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.model.AutoTestCaseWithBLOBs" >
+    update auto_test_case
+    <set >
+      <if test="caseName != null" >
+        case_name = #{caseName,jdbcType=VARCHAR},
+      </if>
+      <if test="host != null" >
+        host = #{host,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null" >
+        port = #{port,jdbcType=INTEGER},
+      </if>
+      <if test="uri != null" >
+        uri = #{uri,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null" >
+        method = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="paramType != null" >
+        param_type = #{paramType,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null" >
+        creat_time = #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="heads != null" >
+        heads = #{heads,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="param != null" >
+        param = #{param,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="actualResult != null" >
+        actual_result = #{actualResult,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.model.AutoTestCaseWithBLOBs" >
+    update auto_test_case
+    set case_name = #{caseName,jdbcType=VARCHAR},
+      host = #{host,jdbcType=VARCHAR},
+      port = #{port,jdbcType=INTEGER},
+      uri = #{uri,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      param_type = #{paramType,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      creat_time = #{creatTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      heads = #{heads,jdbcType=LONGVARCHAR},
+      param = #{param,jdbcType=LONGVARCHAR},
+      actual_result = #{actualResult,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.model.AutoTestCase" >
+    update auto_test_case
+    set case_name = #{caseName,jdbcType=VARCHAR},
+      host = #{host,jdbcType=VARCHAR},
+      port = #{port,jdbcType=INTEGER},
+      uri = #{uri,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      param_type = #{paramType,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      creat_time = #{creatTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

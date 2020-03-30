@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.dao.second.DataSourceMapper" >
+<mapper namespace="com.example.dao.third.DataSourceMapper" >
   <resultMap id="BaseResultMap" type="com.example.model.DataSource" >
     <constructor >
       <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
@@ -253,9 +253,11 @@
 
   <select id="selectByServiceCode" parameterType="string" resultType="com.example.model.DataSourceWithBLOBs">
     select
-    <include refid="Base_Column_List"/>,
-    <include refid="Blob_Column_List"/>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from data_source
+
     where en_name=#{serviceCode}
   </select>
 

@@ -1,6 +1,7 @@
 package com.example.common;
 
 import com.example.enums.InPutFieldCode;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 
@@ -9,6 +10,7 @@ import java.util.HashMap;
  * @createTime 2020年03月20日 10:06:00
  * @Description
  */
+@Component
 public class FeatureComponent {
 
 
