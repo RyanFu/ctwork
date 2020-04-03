@@ -12,11 +12,11 @@
 		"CYCLE":"6",
 		"LOANTYPE": "2",
 		"TID":"5f0a7dc291ec407f90bbe2d60f0498c6",
-		"UID":"83284044",
+		"UID":"test",
 		"engineCode": "qaz1234",
 		"USER_SELLER_NO":"8326CE1095447C919E39D0BD569C06C2"
 	},
 	"pid": "test",
-	"uid": "3343333",
+	"uid": "test",
 	"organId": "12311"
 }

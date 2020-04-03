@@ -1,4 +1,4 @@
-package com.example.common;
+package com.example.common.datasource;
 
 import com.example.enums.InPutFieldCode;
 import org.springframework.stereotype.Component;
@@ -8,7 +8,7 @@ import java.util.HashMap;
 /**
  * @author yicg
  * @createTime 2020年03月20日 10:06:00
- * @Description
+ * @Description   datasource数据源参数映射
  */
 @Component
 public class FeatureComponent {

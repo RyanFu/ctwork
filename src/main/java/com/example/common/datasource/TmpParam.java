@@ -1,6 +1,7 @@
-package com.example.common;
+package com.example.common.datasource;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.common.Const;
 import com.example.enums.InPutFieldCode;
 import com.example.util.JsonReadUtils;
 import com.google.common.collect.Maps;
@@ -11,7 +12,7 @@ import java.util.UUID;
 /**
  * @author yicg
  * @createTime 2020年03月20日 10:43:00
- * @Description   gateway模版参数
+ * @Description   datasource模版参数
  */
 public class TmpParam {
 

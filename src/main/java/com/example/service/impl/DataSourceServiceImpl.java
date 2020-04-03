@@ -4,14 +4,13 @@ package com.example.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.common.Const;
-import com.example.common.FeatureComponent;
-import com.example.common.TmpParam;
+import com.example.common.datasource.FeatureComponent;
+import com.example.common.datasource.TmpParam;
 import com.example.dao.third.DataSourceMapper;
 import com.example.model.DataSourceWithBLOBs;
 import com.example.service.DataSourceService;
 import com.example.util.ExcelReaderUtils;
 import com.example.util.HttpClientUtils;
-import com.example.util.HttpUtils;
 import com.example.vo.ResponseResult;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
@@ -48,7 +47,7 @@ public class DataSourceServiceImpl implements DataSourceService {
         String url=bloBs.getUrlPattern();
         String bodyPattern=bloBs.getBodyPattern();
         //通过模版映射的请求参数
-        String reqBody=HttpUtils.makeParamter(bodyPattern,TmpParam.tmpParam(),FeatureComponent.parameterMaps);
+        String reqBody=HttpClientUtils.makeParamter(bodyPattern,TmpParam.tmpParam(),FeatureComponent.parameterMaps);
         JSONObject body=JSON.parseObject(reqBody);
         log.info("数据源名称 {},获取的参数 {}",serviceCode,body);
         //判断返回结果是否为空

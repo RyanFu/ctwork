@@ -10,27 +10,26 @@ import java.util.Map;
 /**
  * @author yicg
  * @createTime 2020年03月20日 10:43:00
- * @Description   gateway模版参数
+ * @Description   auto_test_case表中模版参数
  */
-public class TmpParam {
+public class TmplateParam {
 
 
 
     public static  Map<String, String> tmpParam(){
         Map<String, String> parm=Maps.newHashMap();
-       // parm.put(InPutFieldCode.USERNAME.name(),getValue("IDCARD"));
-        //parm.put(InPutFieldCode.PASSWORD.name(),getValue("PHONENUM"));
-
-        parm.put(InPutFieldCode.USERNAME.name(),"wangwua");
-        parm.put(InPutFieldCode.PASSWORD.name(),"wangwua123");
-
-
+        parm.put(InPutFieldCodeEnum.USERNAME.name(),"wangwua");
+        parm.put(InPutFieldCodeEnum.PASSWORD.name(),"wangwua123");
         return parm;
 
       }
 
 
 
+
+
+
+      //从文件里读取参数
       public static String getValue(String key){
 
         String path=Const.BASE_PATH+"/src/main/json/gateway_param.json";
