@@ -25,9 +25,4 @@ public class DataSourceController {
     }
 
 
-    @GetMapping(value = "/get/allDatasource")
-    public ResponseResult getAllDataSource(){
-
-        return dataSourceService.getAllDataSource();
-    }
 }

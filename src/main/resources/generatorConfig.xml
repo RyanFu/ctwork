@@ -69,13 +69,9 @@
         </javaClientGenerator>
 
 
-<!--
+
         <table tableName="auto_test_case" domainObjectName="AutoTestCase" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
--->
 
-        <table tableName="feature" domainObjectName="Feature" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="data_source" domainObjectName="DataSource" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
 
-        <!-- geelynote mybatis插件的搭建 -->
     </context>
 </generatorConfiguration>

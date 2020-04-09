@@ -1,109 +1,124 @@
 package com.example.service.impl;
 
-import com.example.common.Const;
-import com.example.dao.AutoTestCaseDao;
-import com.example.dto.TestDto;
-import com.example.model.AutoTestCase;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.example.common.auto.AutoTestCaseFeatureComponent;
+import com.example.common.auto.TmplateParam;
+import com.example.dao.second.AutoTestCaseMapper;
+import com.example.enums.CaseEnum;
+import com.example.model.AutoTestCaseWithBLOBs;
 import com.example.service.AutoTestCaseService;
+import com.example.util.ApiTestUtils;
+import com.example.util.HttpClientUtils;
 import com.example.vo.ResponseResult;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.google.common.collect.Maps;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.testng.TestNG;
-import org.testng.collections.Lists;
 
-import java.util.List;
+import java.util.Map;
 
+/**
+ * @author yicg
+ * @createTime 2020年04月01日 14:54:00
+ * @Description
+ */
+
+@Slf4j
 @Service
 public class AutoTestCaseServiceImpl implements AutoTestCaseService {
 
-    private static Logger logger=LoggerFactory.getLogger(AutoTestCaseServiceImpl.class);
-
     @Autowired
-    private AutoTestCaseDao autoTestCaseDao;
+    private AutoTestCaseMapper autoTestCaseMapper;
 
     /**
-     * java驱动testNG运行测试用例
+     * 调用登录接口
+     * @param id
+     * @return
      */
     @Override
-    public ResponseResult xmlLoad() {
-        TestNG testng = new TestNG();
-        List suites = Lists.newArrayList();
-        suites.add(Const.XMLPATH);
-        testng.setTestSuites(suites);
-        testng.run();
+    public ResponseResult loginCase(int id) {
+        AutoTestCaseWithBLOBs autoTestCaseWithBLOBs=autoTestCaseMapper.selectByPrimaryKey(id);
 
-        System.out.println(testng.getReporters());
-
-        return ResponseResult.successResponse("/Users/yicg/IdeaProjects/ctwork/test-output/index.html");
-
-    }
-
-    @Override
-    public ResponseResult addAutoTestCase(TestDto testDto) {
-        AutoTestCase autoTestCase=new AutoTestCase();
-
-        autoTestCase.setCaseName(testDto.getCaseName());
-        autoTestCase.setHost(testDto.getHost());
-        autoTestCase.setPort(testDto.getPort());
-        autoTestCase.setUri(testDto.getUri());
-        autoTestCase.setMethod(testDto.getMethod());
-        if(null!=testDto.getHeadMap()){
-            autoTestCase.setHeads(testDto.getHeadMap().toString());
-        }
-        autoTestCase.setParamType(testDto.getParamType());
-        if(null !=testDto.getParamMap()){
-            autoTestCase.setParam(testDto.getParamMap().toString());
-        }
-        AutoTestCase testCase = autoTestCaseDao.selectByCaseName(autoTestCase.getCaseName());
-        if (testCase !=null) {
-            return new ResponseResult(400, "用例名称已存在，请修改");
-        } else {
-            int i = autoTestCaseDao.addAutoTestCase(autoTestCase);
-            if (i == 0) {
-                return new ResponseResult(400, "添加用例失败");
-            }
-            logger.info("添加案例成功={}", autoTestCase.toString());
-            return ResponseResult.successResponse(autoTestCase);
-        }
-    }
-
-    @Override
-    public ResponseResult updateCaseInfo(TestDto testDto) {
-        AutoTestCase autoTestCase=new AutoTestCase();
-        autoTestCase.setCaseName(testDto.getCaseName());
-        autoTestCase.setHost(testDto.getHost());
-        autoTestCase.setPort(testDto.getPort());
-        autoTestCase.setUri(testDto.getUri());
-        autoTestCase.setMethod(testDto.getMethod());
-        if(null!=testDto.getHeadMap()){
-            autoTestCase.setHeads(testDto.getHeadMap().toString());
-        }
-        autoTestCase.setParamType(testDto.getParamType());
-        if(null !=testDto.getParamMap()){
-            autoTestCase.setParam(testDto.getParamMap().toString());
-        }
-        if(testDto.getCaseName().equals(null)){
-            return ResponseResult.failResponse("用例名称不能为空");
-        }
-
-        int i=autoTestCaseDao.updateCaseInfo(autoTestCase);
-        if(i==0){
-            return ResponseResult.failResponse("修改用例失败");
+        String response=ApiTestUtils.doHttpRequest(autoTestCaseWithBLOBs);
+        JSONObject result=JSON.parseObject(response);
+        if(HttpClientUtils.resultCode==HttpStatus.SC_OK){
+            updateAutoTestCaseAfterTest(id,response,CaseEnum.SUCCESS.getMessage());
         }else {
-            AutoTestCase caseInfo=autoTestCaseDao.selectByCaseName(autoTestCase.getCaseName());
-            logger.info("修改用例={}",caseInfo);
-            return ResponseResult.successResponse(caseInfo);
+            updateAutoTestCaseAfterTest(id,response,CaseEnum.FAIL.getMessage());
+            throw new RuntimeException("用例执行失败...");
         }
 
+
+        return ResponseResult.createBySuccessMessage(result);
     }
+
 
     @Override
-    public ResponseResult selectAutoTestCase() {
-        List<AutoTestCase> list=autoTestCaseDao.getAllAutoTestCase();
-        return ResponseResult.successResponse(list);
+    public ResponseResult AutoTestCaseById(int id) {
+
+        AutoTestCaseWithBLOBs autoTestCaseWithBLOBs=autoTestCaseMapper.selectByPrimaryKey(id);
+        String response=ApiTestUtils.doHttpRequest(autoTestCaseWithBLOBs);
+        JSONObject result=JSON.parseObject(response);
+        if(HttpClientUtils.resultCode==HttpStatus.SC_OK){
+            updateAutoTestCaseAfterTest(id,response,CaseEnum.SUCCESS.getMessage());
+        }else {
+            updateAutoTestCaseAfterTest(id,response,CaseEnum.FAIL.getMessage());
+            throw new RuntimeException("用例执行失败...");
+        }
+
+
+        return ResponseResult.createBySuccessMessage(result);
+
     }
 
+
+
+
+
+    /**
+     * 测试用例执行前初始化执行状态
+     * @param id
+     * @return
+     */
+    private int updateAutoTestCaseBeforeTest(int id) {
+        AutoTestCaseWithBLOBs autoTestCaseWithBLOBs = new AutoTestCaseWithBLOBs();
+        autoTestCaseWithBLOBs.setState(CaseEnum.UNKNOW.getMessage());
+        autoTestCaseWithBLOBs.setActualResult("null");
+        autoTestCaseWithBLOBs.setId(id);
+        int i=autoTestCaseMapper.updateByPrimaryKeySelective(autoTestCaseWithBLOBs);
+        if(i>0){
+            log.info("用例状态初始化成功.....");
+        }else {log.error("用例状态初始化失败.....");
+            throw new RuntimeException("用例状态初始化失败");
+        }
+
+        return i;
+    }
+
+    /**
+     * 用例执行后更新状态到库
+     * @param id
+     * @param response
+     * @param state
+     * @return
+     */
+    private int updateAutoTestCaseAfterTest(int id,String response,String state) {
+        AutoTestCaseWithBLOBs autoTestCaseWithBLOBs = new AutoTestCaseWithBLOBs();
+        autoTestCaseWithBLOBs.setId(id);
+        autoTestCaseWithBLOBs.setActualResult(response);
+        autoTestCaseWithBLOBs.setState(state);
+
+        int i=autoTestCaseMapper.updateByPrimaryKeySelective(autoTestCaseWithBLOBs);
+        if(i>0){
+            log.info("用例执行状态修改成功.....");
+        }else {
+            log.error("用例执行状态修改失败.....");
+            throw new RuntimeException("用例执行状态修改失败");
+        }
+        return i;
+    }
 
 }

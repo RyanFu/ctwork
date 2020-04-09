@@ -30,4 +30,12 @@ public class DataSourceWithBLOBs extends DataSource {
     public void setSampleOutput(String sampleOutput) {
         this.sampleOutput = sampleOutput == null ? null : sampleOutput.trim();
     }
+
+    @Override
+    public String toString() {
+        return "DataSourceWithBLOBs{" +
+                "bodyPattern='" + bodyPattern + '\'' +
+                ", sampleOutput='" + sampleOutput + '\'' +
+                '}';
+    }
 }

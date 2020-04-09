@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.dao.master.ChannelOcrInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.example.model.ChannelOcrInfo" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="uid" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="card_id_no" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="card_invalid_date" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="fetch_photo_method" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.example.model.ChannelOcrInfoWithBLOBs" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="uid" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="card_id_no" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="card_invalid_date" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="fetch_photo_method" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="address" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="detail" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, uid, name, card_id_no, card_invalid_date, fetch_photo_method
+  </sql>
+  <sql id="Blob_Column_List" >
+    address, detail
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from channel_ocr_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from channel_ocr_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.example.model.ChannelOcrInfoWithBLOBs" >
+    insert into channel_ocr_info (id, uid, name, 
+      card_id_no, card_invalid_date, fetch_photo_method, 
+      address, detail)
+    values (#{id,jdbcType=BIGINT}, #{uid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{cardIdNo,jdbcType=VARCHAR}, #{cardInvalidDate,jdbcType=VARCHAR}, #{fetchPhotoMethod,jdbcType=VARCHAR}, 
+      #{address,jdbcType=LONGVARCHAR}, #{detail,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.model.ChannelOcrInfoWithBLOBs" >
+    insert into channel_ocr_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="cardIdNo != null" >
+        card_id_no,
+      </if>
+      <if test="cardInvalidDate != null" >
+        card_invalid_date,
+      </if>
+      <if test="fetchPhotoMethod != null" >
+        fetch_photo_method,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="detail != null" >
+        detail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="cardIdNo != null" >
+        #{cardIdNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cardInvalidDate != null" >
+        #{cardInvalidDate,jdbcType=VARCHAR},
+      </if>
+      <if test="fetchPhotoMethod != null" >
+        #{fetchPhotoMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="detail != null" >
+        #{detail,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.model.ChannelOcrInfoWithBLOBs" >
+    update channel_ocr_info
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="cardIdNo != null" >
+        card_id_no = #{cardIdNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cardInvalidDate != null" >
+        card_invalid_date = #{cardInvalidDate,jdbcType=VARCHAR},
+      </if>
+      <if test="fetchPhotoMethod != null" >
+        fetch_photo_method = #{fetchPhotoMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="detail != null" >
+        detail = #{detail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.model.ChannelOcrInfoWithBLOBs" >
+    update channel_ocr_info
+    set uid = #{uid,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      card_id_no = #{cardIdNo,jdbcType=VARCHAR},
+      card_invalid_date = #{cardInvalidDate,jdbcType=VARCHAR},
+      fetch_photo_method = #{fetchPhotoMethod,jdbcType=VARCHAR},
+      address = #{address,jdbcType=LONGVARCHAR},
+      detail = #{detail,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.model.ChannelOcrInfo" >
+    update channel_ocr_info
+    set uid = #{uid,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      card_id_no = #{cardIdNo,jdbcType=VARCHAR},
+      card_invalid_date = #{cardInvalidDate,jdbcType=VARCHAR},
+      fetch_photo_method = #{fetchPhotoMethod,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateByUid" parameterType="com.example.model.ChannelOcrInfoWithBLOBs" >
+    update channel_ocr_info
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="cardIdNo != null" >
+        card_id_no = #{cardIdNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cardInvalidDate != null" >
+        card_invalid_date = #{cardInvalidDate,jdbcType=VARCHAR},
+      </if>
+      <if test="fetchPhotoMethod != null" >
+        fetch_photo_method = #{fetchPhotoMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="detail != null" >
+        detail = #{detail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByUid" parameterType="string" resultType="com.example.model.ChannelOcrInfoWithBLOBs">
+    select
+    <include refid="Base_Column_List"/>,
+    <include refid="Blob_Column_List"/>
+    from
+    channel_ocr_info
+    where
+    uid=#{uid}
+    order by id desc limit 1
+  </select>
+
+</mapper>

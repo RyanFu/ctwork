@@ -1,15 +1,13 @@
 package com.example.service;
 
-import com.example.dto.TestDto;
+
 import com.example.vo.ResponseResult;
 
 public interface AutoTestCaseService {
 
-     ResponseResult xmlLoad();
+     ResponseResult loginCase(int id);
 
-     ResponseResult addAutoTestCase(TestDto testDto);
+     ResponseResult AutoTestCaseById(int id);
 
-     ResponseResult updateCaseInfo(TestDto testDto);
 
-     ResponseResult selectAutoTestCase();
 }

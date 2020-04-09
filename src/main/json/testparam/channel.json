@@ -1,0 +1,19 @@
+{
+	"act": "query",
+	"callbackUrl": "http://localhost:9000/api/decision/simpleResultCallback",
+	"dataSource": 1,
+	"engineCode": "YCG_TES_002",
+	"engineId": "315784455294080",
+	"isCalcMatrix": false,
+	"nonce": "ckstcrpd99",
+	"organId": 67,
+	"reqType": 1,
+	"sign": "988dc12d0412ad4147b9805af175be6b",
+	"ts":"1574240546823",
+	"inFields": {
+
+		"TRAFFIC":"JUMEI",
+		"PRODUCT":"1",
+		"productId":"234567"
+	}
+}

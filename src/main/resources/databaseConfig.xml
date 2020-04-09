@@ -20,14 +20,13 @@
                 <!-- 数据库用户... -->
                 <property name="username" value="root"/>
                 <!-- 数据库密码... -->
-                <property name="password" value="123456"/>
+                <property name="password" value="12345678"/>
             </dataSource>
         </environment>
     </environments>
     <!-- 注册映射文件：java对象与数据库之间的xml文件路径！ -->
     <mappers>
-         <mapper resource="mapper/testNGMapper.xml"/>
-         <mapper resource="mapper/dataSourceMapper.xml"/>
+         <mapper resource="mappers/testCaseMapper.xml"/>
     </mappers>
 
 </configuration>

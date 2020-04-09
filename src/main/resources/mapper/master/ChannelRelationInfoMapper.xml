@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.dao.master.ChannelRelationInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.example.model.ChannelRelationInfo" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="uid" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="relation_level" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="relation_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="mobile_no" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="relation" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, uid, relation_level, relation_name, mobile_no, relation
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from channel_relation_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from channel_relation_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.example.model.ChannelRelationInfo" >
+    insert into channel_relation_info (id, uid, relation_level, 
+      relation_name, mobile_no, relation
+      )
+    values (#{id,jdbcType=BIGINT}, #{uid,jdbcType=VARCHAR}, #{relationLevel,jdbcType=INTEGER}, 
+      #{relationName,jdbcType=VARCHAR}, #{mobileNo,jdbcType=VARCHAR}, #{relation,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.model.ChannelRelationInfo" >
+    insert into channel_relation_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="relationLevel != null" >
+        relation_level,
+      </if>
+      <if test="relationName != null" >
+        relation_name,
+      </if>
+      <if test="mobileNo != null" >
+        mobile_no,
+      </if>
+      <if test="relation != null" >
+        relation,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="relationLevel != null" >
+        #{relationLevel,jdbcType=INTEGER},
+      </if>
+      <if test="relationName != null" >
+        #{relationName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileNo != null" >
+        #{mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="relation != null" >
+        #{relation,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.model.ChannelRelationInfo" >
+    update channel_relation_info
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="relationLevel != null" >
+        relation_level = #{relationLevel,jdbcType=INTEGER},
+      </if>
+      <if test="relationName != null" >
+        relation_name = #{relationName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileNo != null" >
+        mobile_no = #{mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="relation != null" >
+        relation = #{relation,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.model.ChannelRelationInfo" >
+    update channel_relation_info
+    set uid = #{uid,jdbcType=VARCHAR},
+      relation_level = #{relationLevel,jdbcType=INTEGER},
+      relation_name = #{relationName,jdbcType=VARCHAR},
+      mobile_no = #{mobileNo,jdbcType=VARCHAR},
+      relation = #{relation,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateByUid" parameterType="com.example.model.ChannelRelationInfo" >
+    update channel_relation_info
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="relationLevel != null" >
+        relation_level = #{relationLevel,jdbcType=INTEGER},
+      </if>
+      <if test="relationName != null" >
+        relation_name = #{relationName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileNo != null" >
+        mobile_no = #{mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="relation != null" >
+        relation = #{relation,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByUidAndRelationLevel" resultType="com.example.model.ChannelRelationInfo">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    channel_relation_info
+    where  uid=#{uid} and relation_level=#{relationLevel}
+  </select>
+
+  <select id="selectByUid" parameterType="string" resultType="com.example.model.ChannelRelationInfo">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    channel_relation_info
+    where uid=#{uid}
+  </select>
+</mapper>

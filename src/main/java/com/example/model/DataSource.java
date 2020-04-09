@@ -1,5 +1,6 @@
 package com.example.model;
 
+
 public class DataSource {
     private Long id;
 
@@ -149,5 +150,25 @@ public class DataSource {
 
     public void setDataSourceAuthId(Long dataSourceAuthId) {
         this.dataSourceAuthId = dataSourceAuthId;
+    }
+
+
+    @Override
+    public String toString() {
+        return "DataSource{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", enName='" + enName + '\'' +
+                ", description='" + description + '\'' +
+                ", isPublic=" + isPublic +
+                ", callType='" + callType + '\'' +
+                ", urlPattern='" + urlPattern + '\'' +
+                ", createBy='" + createBy + '\'' +
+                ", updateBy='" + updateBy + '\'' +
+                ", createAt=" + createAt +
+                ", updateAt=" + updateAt +
+                ", timeout=" + timeout +
+                ", dataSourceAuthId=" + dataSourceAuthId +
+                '}';
     }
 }

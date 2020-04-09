@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.dao.master.ChannelBankInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.example.model.ChannelBankInfo" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="uid" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="bank_card_no" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="product_cd" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="mobile" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="card_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="card_type" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="bank_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="bank_short_cd" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="card_bin_no" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="card_length" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="bank_no" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="acct_function_type" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, uid, bank_card_no, product_cd, mobile, card_name, card_type, bank_name, bank_short_cd, 
+    card_bin_no, card_length, bank_no, acct_function_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from channel_bank_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from channel_bank_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.example.model.ChannelBankInfo" >
+    insert into channel_bank_info (id, uid, bank_card_no, 
+      product_cd, mobile, card_name, 
+      card_type, bank_name, bank_short_cd, 
+      card_bin_no, card_length, bank_no, 
+      acct_function_type)
+    values (#{id,jdbcType=BIGINT}, #{uid,jdbcType=VARCHAR}, #{bankCardNo,jdbcType=VARCHAR}, 
+      #{productCd,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{cardName,jdbcType=VARCHAR}, 
+      #{cardType,jdbcType=VARCHAR}, #{bankName,jdbcType=VARCHAR}, #{bankShortCd,jdbcType=VARCHAR}, 
+      #{cardBinNo,jdbcType=VARCHAR}, #{cardLength,jdbcType=INTEGER}, #{bankNo,jdbcType=VARCHAR}, 
+      #{acctFunctionType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.model.ChannelBankInfo" >
+    insert into channel_bank_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="bankCardNo != null" >
+        bank_card_no,
+      </if>
+      <if test="productCd != null" >
+        product_cd,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="cardName != null" >
+        card_name,
+      </if>
+      <if test="cardType != null" >
+        card_type,
+      </if>
+      <if test="bankName != null" >
+        bank_name,
+      </if>
+      <if test="bankShortCd != null" >
+        bank_short_cd,
+      </if>
+      <if test="cardBinNo != null" >
+        card_bin_no,
+      </if>
+      <if test="cardLength != null" >
+        card_length,
+      </if>
+      <if test="bankNo != null" >
+        bank_no,
+      </if>
+      <if test="acctFunctionType != null" >
+        acct_function_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCardNo != null" >
+        #{bankCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="productCd != null" >
+        #{productCd,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="cardName != null" >
+        #{cardName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null" >
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankShortCd != null" >
+        #{bankShortCd,jdbcType=VARCHAR},
+      </if>
+      <if test="cardBinNo != null" >
+        #{cardBinNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cardLength != null" >
+        #{cardLength,jdbcType=INTEGER},
+      </if>
+      <if test="bankNo != null" >
+        #{bankNo,jdbcType=VARCHAR},
+      </if>
+      <if test="acctFunctionType != null" >
+        #{acctFunctionType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.model.ChannelBankInfo" >
+    update channel_bank_info
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCardNo != null" >
+        bank_card_no = #{bankCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="productCd != null" >
+        product_cd = #{productCd,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="cardName != null" >
+        card_name = #{cardName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null" >
+        card_type = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        bank_name = #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankShortCd != null" >
+        bank_short_cd = #{bankShortCd,jdbcType=VARCHAR},
+      </if>
+      <if test="cardBinNo != null" >
+        card_bin_no = #{cardBinNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cardLength != null" >
+        card_length = #{cardLength,jdbcType=INTEGER},
+      </if>
+      <if test="bankNo != null" >
+        bank_no = #{bankNo,jdbcType=VARCHAR},
+      </if>
+      <if test="acctFunctionType != null" >
+        acct_function_type = #{acctFunctionType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.model.ChannelBankInfo" >
+    update channel_bank_info
+    set uid = #{uid,jdbcType=VARCHAR},
+      bank_card_no = #{bankCardNo,jdbcType=VARCHAR},
+      product_cd = #{productCd,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      card_name = #{cardName,jdbcType=VARCHAR},
+      card_type = #{cardType,jdbcType=VARCHAR},
+      bank_name = #{bankName,jdbcType=VARCHAR},
+      bank_short_cd = #{bankShortCd,jdbcType=VARCHAR},
+      card_bin_no = #{cardBinNo,jdbcType=VARCHAR},
+      card_length = #{cardLength,jdbcType=INTEGER},
+      bank_no = #{bankNo,jdbcType=VARCHAR},
+      acct_function_type = #{acctFunctionType,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+  <update id="updateByUid" parameterType="com.example.model.ChannelBankInfo" >
+    update channel_bank_info
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCardNo != null" >
+        bank_card_no = #{bankCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="productCd != null" >
+        product_cd = #{productCd,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="cardName != null" >
+        card_name = #{cardName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null" >
+        card_type = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        bank_name = #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankShortCd != null" >
+        bank_short_cd = #{bankShortCd,jdbcType=VARCHAR},
+      </if>
+      <if test="cardBinNo != null" >
+        card_bin_no = #{cardBinNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cardLength != null" >
+        card_length = #{cardLength,jdbcType=INTEGER},
+      </if>
+      <if test="bankNo != null" >
+        bank_no = #{bankNo,jdbcType=VARCHAR},
+      </if>
+      <if test="acctFunctionType != null" >
+        acct_function_type = #{acctFunctionType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByUid" parameterType="string" resultType="com.example.model.ChannelBankInfo">
+    select
+    <include refid="Base_Column_List"/>
+    from channel_bank_info
+    where
+    uid=#{uid}
+
+  </select>
+
+</mapper>
