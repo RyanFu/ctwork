@@ -7,6 +7,7 @@ import com.example.common.auto.TmplateParam;
 import com.example.dao.second.AutoTestCaseMapper;
 import com.example.enums.CaseEnum;
 import com.example.model.AutoTestCaseWithBLOBs;
+import com.example.util.ApiTestUtils;
 import com.example.util.HttpClientUtils;
 import com.example.vo.ResponseResult;
 import com.google.common.collect.Maps;
@@ -50,19 +51,15 @@ public class AutoCases {
         String host=autoTestCaseWithBLOBs.getHost();
         String uri=autoTestCaseWithBLOBs.getUri();
         String port= String.valueOf(autoTestCaseWithBLOBs.getPort());
-        String param=autoTestCaseWithBLOBs.getParam();
         String url=host+":"+port+uri;
 
         //初始化待测用例
         updateAutoTestCaseBeforeTest(id);
-        //通过模版映射的请求参数
-        String reqBody = HttpClientUtils.makeParamter(param, TmplateParam.tmpParam(), AutoTestCaseFeatureComponent.paramMap);
-        JSONObject body = JSON.parseObject(reqBody);
-        String response = HttpClientUtils.postForSession(url, body, headers);
+        String response = ApiTestUtils.doHttpRequest(autoTestCaseWithBLOBs);
         result=JSON.parseObject(response);
         if(HttpClientUtils.resultCode==HttpStatus.SC_OK){
             updateAutoTestCaseAfterTest(id,response,CaseEnum.SUCCESS.getMessage());
-            log.info("运行的用例名称 {},接口地址: {},参数:{},数据源返回结果 {}",caseName,url,reqBody,result);
+            log.info("运行的用例名称 {},接口地址: {},参数:{},数据源返回结果 {}",caseName,url,result);
         }else {
             updateAutoTestCaseAfterTest(id,response,CaseEnum.FAIL.getMessage());
             log.error("运行的用例名称 {},接口地址: {}",caseName,url);

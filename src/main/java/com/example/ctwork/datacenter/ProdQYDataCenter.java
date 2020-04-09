@@ -29,10 +29,6 @@ public class ProdQYDataCenter {
 
 
 
-    //sheet7字段和参数
-    public static String PROD_PARAM_SHEET_007=Const.PROD_SHEET_007;
-    public static String FILE_NAME_SHEET_007="sheet7";
-
     //sheet8字段和参数
     public static String PROD_PARAM_SHEET_008=Const.PROD_SHEET_008;
     public static String FILE_NAME_SHEET_008="颜值贷0304";
@@ -64,7 +60,7 @@ public class ProdQYDataCenter {
         JSONObject jsonObject =JsonReadUtils.readJsonFile(PROD_PARAM_SHEET_009);
         jsonObject.put("fields",var_name);
 
-        String response = HttpClientUtils.postMethod(URL, jsonObject, headers);
+        String response = HttpClientUtils.doPostWithJson(URL, jsonObject, headers);
         JSONObject json=JSON.parseObject(response);
 
         log.info(var_name +"--"+desc+"---->" + json.get("data"));

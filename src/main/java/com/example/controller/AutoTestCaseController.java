@@ -21,8 +21,13 @@ public class AutoTestCaseController {
     @GetMapping(value = "/auto/test")
     public ResponseResult cseTestById(@RequestParam int id){
         //调用登录
-        autoTestCaseService.loginCase(15);
-
-       return autoTestCaseService.AutoTestCaseById(id);
+        if(id==15){
+           autoTestCaseService.loginCase(id);
+           return ResponseResult.createBySuccessMessage("初始化登录成功！！！");
+        }else {
+            autoTestCaseService.loginCase(15);
+            return autoTestCaseService.AutoTestCaseById(id);
+        }
     }
+
 }

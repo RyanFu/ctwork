@@ -1,12 +1,40 @@
 package com.example.common.auto;
 
 
-
+/**
+ *  auto_test_case表中参数映射
+ */
 public enum InPutFieldCodeEnum {
-
-    //auto_test_case表中参数映射
+    /**
+     * 用户名
+     */
     USERNAME,
-    PASSWORD
+    /**
+     * 密码
+     */
+    PASSWORD,
+    /**
+     * 注册问题
+     */
+    ANSWER,
+    /**
+     * 注册答案
+     */
+    QUESTION,
+
+    /**
+     * 注册邮箱
+     */
+    EMAIL,
+
+    /**
+     * 注册手机号
+     */
+    PHONE,
+    /**
+     * 用户角色
+     */
+    ROLE
     ;
 
 

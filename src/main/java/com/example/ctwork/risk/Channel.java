@@ -53,7 +53,7 @@ public class Channel {
         jsonObject.put("pid",UUID.randomUUID());
 
         System.out.println(inFields);
-        String response = HttpClientUtils.postMethod(URL, jsonObject, headers);
+        String response = HttpClientUtils.doPostWithJson(URL, jsonObject, headers);
         JSONObject json=JSON.parseObject(response);
 
 

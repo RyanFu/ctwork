@@ -51,7 +51,7 @@ public class DataSourceServiceImpl implements DataSourceService {
         JSONObject body=JSON.parseObject(reqBody);
         log.info("数据源名称 {},获取的参数 {}",serviceCode,body);
         //判断返回结果是否为空
-        String response=HttpClientUtils.postMethod(url,body,headers);
+        String response=HttpClientUtils.doPostWithKeyValue(url,body,headers);
         if(StringUtils.isEmpty(response)){
             log.error("数据源名称 {},数据源请求失败 {}",serviceCode,response);
             return ResponseResult.createByError(response);

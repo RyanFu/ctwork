@@ -39,7 +39,7 @@ public class ChannelData {
     public void QYDataCenterRead(String uid) {
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
-        String result=HttpClientUtils.doGet(URL+uid);
+        String result=HttpClientUtils.doGetOnlyUrl(URL+uid);
 
     }
 }
