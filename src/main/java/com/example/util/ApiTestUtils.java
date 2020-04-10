@@ -35,6 +35,13 @@ public class ApiTestUtils{
         String heads=testCase.getHeads();
         String requestParam=testCase.getParam();
 
+        //判断参数是否为空
+        JSONObject requestBody=null;
+        if(! StringUtils.isEmpty(requestParam)){
+            //通过模版映射的请求参数
+            String reqBody = HttpClientUtils.makeParamter(requestParam, TmplateParam.tmpParam(), AutoTestCaseFeatureComponent.paramMap);
+            requestBody = JSON.parseObject(reqBody);
+        }
         //获取请求头
         Map<String,String> headMap=requestHead(heads);
         if(StringUtils.isEmpty(port)){
@@ -42,33 +49,32 @@ public class ApiTestUtils{
         }if(!StringUtils.isEmpty(port)) {
             url=host+":"+port+uri;
         }
+
         //请求方式  POST/GET
         String method=testCase.getMethod();
         //请求类型：1.json   2.key-value
         String param_type=testCase.getParamType();
-
         String response="";
 
 
         if(method.equals("POST")){
-            //通过模版映射的请求参数
-            String reqBody = HttpClientUtils.makeParamter(requestParam, TmplateParam.tmpParam(), AutoTestCaseFeatureComponent.paramMap);
-            JSONObject requestBody = JSON.parseObject(reqBody);
 
-            //param_type  100:普通application/json请求，不需要cookies    200:key-value请求，访问成功后生成cookie
             if(param_type.equals("100")){
                 response=HttpClientUtils.doPostWithJson(url,requestBody,headMap);
 
-              log.info("请求地址:{},请求参数:{},返回结果:{}",url,reqBody,JSON.parseObject(response));
-            } if(param_type.equals("200")){
+              log.info("请求地址:{},请求参数:{},返回结果:{}",url,requestBody,JSON.parseObject(response));
+            } if(param_type.equals("101")){
               response= HttpClientUtils.doPostWithKeyValueGetSession(url,requestBody,headMap);
-              log.info("请求地址:{},请求参数:{},返回结果:{}",url,reqBody,JSON.parseObject(response));
+              log.info("请求地址:{},请求参数:{},返回结果:{}",url,requestBody,JSON.parseObject(response));
             }
         }
         if(method.equals("GET")){
-            if(null ==requestParam){
+            if(param_type.equals("200")){
                response=HttpClientUtils.doGetOnlyUrlWithSession(url);
                log.info("请求地址:{},返回结果:{}",url,JSON.parseObject(response));
+            }if(param_type.equals("201")){
+                response=HttpClientUtils.doGetWithParamsWithSession(url,requestBody);
+                log.info("请求地址:{},返回结果:{}",url,JSON.parseObject(response));
             }
         }
         return response;

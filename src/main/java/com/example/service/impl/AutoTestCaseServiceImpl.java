@@ -2,8 +2,6 @@ package com.example.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.example.common.auto.AutoTestCaseFeatureComponent;
-import com.example.common.auto.TmplateParam;
 import com.example.dao.second.AutoTestCaseMapper;
 import com.example.enums.CaseEnum;
 import com.example.model.AutoTestCaseWithBLOBs;
@@ -11,14 +9,11 @@ import com.example.service.AutoTestCaseService;
 import com.example.util.ApiTestUtils;
 import com.example.util.HttpClientUtils;
 import com.example.vo.ResponseResult;
-import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
 
 /**
  * @author yicg
@@ -90,9 +85,9 @@ public class AutoTestCaseServiceImpl implements AutoTestCaseService {
         autoTestCaseWithBLOBs.setId(id);
         int i=autoTestCaseMapper.updateByPrimaryKeySelective(autoTestCaseWithBLOBs);
         if(i>0){
-            log.info("用例状态初始化成功.....");
-        }else {log.error("用例状态初始化失败.....");
-            throw new RuntimeException("用例状态初始化失败");
+            log.info("用例id:{},执行结果:{}",id,"用例状态初始化成功.....");
+        }else {log.error("用例id:{},执行结果:{}","用例状态初始化失败.....");
+            throw new RuntimeException("用例编号id"+id+"用例状态初始化失败");
         }
 
         return i;
@@ -113,10 +108,10 @@ public class AutoTestCaseServiceImpl implements AutoTestCaseService {
 
         int i=autoTestCaseMapper.updateByPrimaryKeySelective(autoTestCaseWithBLOBs);
         if(i>0){
-            log.info("用例执行状态修改成功.....");
+            log.info("用例id:{},执行结果:{}",id,"用例执行状态修改成功.....");
         }else {
-            log.error("用例执行状态修改失败.....");
-            throw new RuntimeException("用例执行状态修改失败");
+            log.error("用例id:{},执行结果:{}",id,"用例执行状态修改失败.....");
+            throw new RuntimeException("用例编号id"+id+"用例执行状态修改失败");
         }
         return i;
     }

@@ -15,6 +15,13 @@ public class AutoTestCase {
 
     private String method;
 
+    /**
+     * 100:普通post请求，application/json请求，不需要cookies
+     * 101:普通post请求，key-value请求，访问成功后生成cookies
+     *
+     * 200:普通get请求，无参数访问，依赖cookies
+     * 201:普通get请求，需要参数?key=value
+     */
     private String paramType;
 
     private String state;

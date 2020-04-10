@@ -25,7 +25,7 @@ public class AutoTestCaseController {
            autoTestCaseService.loginCase(id);
            return ResponseResult.createBySuccessMessage("初始化登录成功！！！");
         }else {
-            autoTestCaseService.loginCase(15);
+             autoTestCaseService.loginCase(15);
             return autoTestCaseService.AutoTestCaseById(id);
         }
     }

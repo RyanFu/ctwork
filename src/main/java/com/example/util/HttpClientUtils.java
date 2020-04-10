@@ -2,23 +2,27 @@ package com.example.util;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
+import org.apache.http.*;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.util.EntityUtils;
+import org.springframework.web.util.UriBuilder;
+import org.testng.collections.Lists;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -211,7 +215,7 @@ public class HttpClientUtils {
 
 
     /**
-     * get请求,不含请求头,携带登录session请求
+     * get请求,不含请求头,不含参数，携带登录session请求
      * @param url
      * @return
      */
@@ -235,6 +239,46 @@ public class HttpClientUtils {
             return null;
         }
     }
+
+    /**
+     * 普通get请求，需要参数?key=value ，依赖登录生成的cookies
+     * @param url
+     * @param param
+     * @return
+     */
+    public static String doGetWithParamsWithSession(String url,JSONObject param) {
+        DefaultHttpClient client=new DefaultHttpClient();
+        client.setCookieStore(cookieStore);
+        //封装请求参数
+        List<NameValuePair> list = new ArrayList<NameValuePair>();
+        for (String key : param.keySet()) {
+            list.add(new BasicNameValuePair(key, String.valueOf(param.get(key))));
+        }
+        try {
+            String requestParams=EntityUtils.toString(new UrlEncodedFormEntity(list, Consts.UTF_8));
+            HttpGet get=new HttpGet(url+"?"+requestParams);
+            log.info("get请求数据:{}",url+"?"+requestParams);
+            HttpResponse httpResponse=client.execute(get);
+            String result=EntityUtils.toString(httpResponse.getEntity(),"utf-8");
+            resultCode=httpResponse.getStatusLine().getStatusCode();
+            return result;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+   }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
