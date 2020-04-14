@@ -7,7 +7,7 @@ import com.example.enums.CaseEnum;
 import com.example.model.AutoTestCaseWithBLOBs;
 import com.example.service.AutoTestCaseService;
 import com.example.util.ApiTestUtils;
-import com.example.util.HttpClientUtils;
+import com.example.util.HttpForSessionUtils;
 import com.example.vo.ResponseResult;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpStatus;
@@ -36,10 +36,12 @@ public class AutoTestCaseServiceImpl implements AutoTestCaseService {
     @Override
     public ResponseResult loginCase(int id) {
         AutoTestCaseWithBLOBs autoTestCaseWithBLOBs=autoTestCaseMapper.selectByPrimaryKey(id);
+        //用例状态初始化
+        updateAutoTestCaseBeforeTest(id);
 
         String response=ApiTestUtils.doHttpRequest(autoTestCaseWithBLOBs);
         JSONObject result=JSON.parseObject(response);
-        if(HttpClientUtils.resultCode==HttpStatus.SC_OK){
+        if(ApiTestUtils.resultCode==HttpStatus.SC_OK){
             updateAutoTestCaseAfterTest(id,response,CaseEnum.SUCCESS.getMessage());
         }else {
             updateAutoTestCaseAfterTest(id,response,CaseEnum.FAIL.getMessage());
@@ -53,11 +55,13 @@ public class AutoTestCaseServiceImpl implements AutoTestCaseService {
 
     @Override
     public ResponseResult AutoTestCaseById(int id) {
-
         AutoTestCaseWithBLOBs autoTestCaseWithBLOBs=autoTestCaseMapper.selectByPrimaryKey(id);
+        //用例状态初始化
+        updateAutoTestCaseBeforeTest(id);
+
         String response=ApiTestUtils.doHttpRequest(autoTestCaseWithBLOBs);
         JSONObject result=JSON.parseObject(response);
-        if(HttpClientUtils.resultCode==HttpStatus.SC_OK){
+        if(ApiTestUtils.resultCode==HttpStatus.SC_OK){
             updateAutoTestCaseAfterTest(id,response,CaseEnum.SUCCESS.getMessage());
         }else {
             updateAutoTestCaseAfterTest(id,response,CaseEnum.FAIL.getMessage());

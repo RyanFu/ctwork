@@ -2,6 +2,7 @@ package com.example.util;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,9 +15,9 @@ import java.io.*;
  *
  * 读取json文件
  */
+@Slf4j
 public class JsonReadUtils {
 
-    private static final Logger logger = LoggerFactory.getLogger(JsonReadUtils.class);
 
     /**
      * 读取json文件
@@ -40,7 +41,7 @@ public class JsonReadUtils {
             JSONObject jsonObject=JSON.parseObject(jsonStr);
             return jsonObject;
         } catch (Exception e) {
-            logger.info("读取文件出现异常，读取失败!==>"+jsonFile.getName());
+            log.info("读取文件出现异常，读取失败!==>"+jsonFile.getName());
             e.printStackTrace();
             return null;
         }

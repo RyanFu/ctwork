@@ -21,6 +21,29 @@ import java.util.Map;
 @Slf4j
 public class ApiTestUtils{
 
+    public static int resultCode;
+
+    /**
+     * 请求方式判断
+     */
+    private static final String GET_METHOD="GET";
+    private static final String POST_METHOD="POST";
+
+
+
+    /**
+     * 100:普通post请求，application/json请求，不需要cookies
+     *
+     * 101:普通post请求，key-value请求，访问成功后生成cookies
+     *
+     * 200:普通get请求，无参数访问，依赖cookies
+     * 201:普通get请求，需要参数?key=value
+     */
+    private static final String PARAM_TYPE_100 ="100";
+    private static final String PARAM_TYPE_101 ="101";
+    private static final String PARAM_TYPE_200 ="200";
+    private static final String PARAM_TYPE_201 ="201";
+
 
 
     /**
@@ -52,28 +75,31 @@ public class ApiTestUtils{
 
         //请求方式  POST/GET
         String method=testCase.getMethod();
-        //请求类型：1.json   2.key-value
+        //请求类型：100.json   2.key-value
         String param_type=testCase.getParamType();
         String response="";
 
-
-        if(method.equals("POST")){
-
-            if(param_type.equals("100")){
+        //判断请求方式为post
+        if(POST_METHOD.equals(method)){
+            if(PARAM_TYPE_100.equals(param_type)){
                 response=HttpClientUtils.doPostWithJson(url,requestBody,headMap);
-
+                resultCode=HttpClientUtils.resultCode;
               log.info("请求地址:{},请求参数:{},返回结果:{}",url,requestBody,JSON.parseObject(response));
-            } if(param_type.equals("101")){
-              response= HttpClientUtils.doPostWithKeyValueGetSession(url,requestBody,headMap);
+            } if(PARAM_TYPE_101.equals(param_type)){
+              response= HttpForSessionUtils.doPostWithKeyValueGetSession(url,requestBody,headMap);
+              resultCode=HttpForSessionUtils.resultCode;
               log.info("请求地址:{},请求参数:{},返回结果:{}",url,requestBody,JSON.parseObject(response));
             }
         }
-        if(method.equals("GET")){
-            if(param_type.equals("200")){
-               response=HttpClientUtils.doGetOnlyUrlWithSession(url);
+        //判断请求方式为get
+        if(GET_METHOD.equals(method)){
+            if(PARAM_TYPE_200.equals(param_type)){
+               response=HttpForSessionUtils.doGetOnlyUrlWithSession(url);
+               resultCode=HttpForSessionUtils.resultCode;
                log.info("请求地址:{},返回结果:{}",url,JSON.parseObject(response));
-            }if(param_type.equals("201")){
-                response=HttpClientUtils.doGetWithParamsWithSession(url,requestBody);
+            }if(PARAM_TYPE_201.equals(param_type)){
+                response=HttpForSessionUtils.doGetWithParamsWithSession(url,requestBody);
+                resultCode=HttpForSessionUtils.resultCode;
                 log.info("请求地址:{},返回结果:{}",url,JSON.parseObject(response));
             }
         }
