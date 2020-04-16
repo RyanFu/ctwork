@@ -34,10 +34,12 @@ public class HttpClientUtils {
 
     public static int resultCode;
 
-    //httpclient超时时间
-    private static final int CONNECTION_TIMEOUT=20000;
-    private static final int REQUEST_TIMEOUT=20000;
-    private static final int SOCKET_TIMEOUT=20000;
+    //连接超时时间
+    private static final int CONNECTION_TIMEOUT=10000;
+    //从连接池中取的连接的最长时间
+    private static final int REQUEST_TIMEOUT=10000;
+    //数据传输的超时时间
+    private static final int SOCKET_TIMEOUT=10000;
 
 
 
@@ -53,11 +55,8 @@ public class HttpClientUtils {
         HttpPost post=new HttpPost(url);
         CloseableHttpClient client=HttpClients.createDefault();
         RequestConfig config = RequestConfig.custom()
-                //连接超时时间
                 .setConnectTimeout(CONNECTION_TIMEOUT)
-                //从连接池中取的连接的最长时间
                 .setConnectionRequestTimeout(REQUEST_TIMEOUT)
-                //数据传输的超时时间
                 .setSocketTimeout(SOCKET_TIMEOUT)
                 .build();
         post.setConfig(config);
@@ -90,11 +89,8 @@ public class HttpClientUtils {
         HttpPost post=new HttpPost(url);
         CloseableHttpClient client=HttpClients.createDefault();
         RequestConfig config = RequestConfig.custom()
-                //连接超时时间
                 .setConnectTimeout(CONNECTION_TIMEOUT)
-                //从连接池中取的连接的最长时间
                 .setConnectionRequestTimeout(REQUEST_TIMEOUT)
-                //数据传输的超时时间
                 .setSocketTimeout(SOCKET_TIMEOUT)
                 .build();
         post.setConfig(config);
@@ -135,11 +131,8 @@ public class HttpClientUtils {
         HttpGet get=new HttpGet(url);
         CloseableHttpClient client=HttpClients.createDefault();
         RequestConfig config = RequestConfig.custom()
-                //连接超时时间
                 .setConnectTimeout(CONNECTION_TIMEOUT)
-                //从连接池中取的连接的最长时间
                 .setConnectionRequestTimeout(REQUEST_TIMEOUT)
-                //数据传输的超时时间
                 .setSocketTimeout(SOCKET_TIMEOUT)
                 .build();
         get.setConfig(config);
@@ -168,7 +161,6 @@ public class HttpClientUtils {
 
     /**
      * 替换模版参数
-     *
      * @param bodyPattern
      * @param param
      * @return

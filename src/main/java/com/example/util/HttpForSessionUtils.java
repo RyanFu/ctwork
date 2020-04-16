@@ -28,13 +28,21 @@ import java.util.Map;
  */
 @Slf4j
 public class HttpForSessionUtils {
-
+    /**
+     * 登录成功生成的session
+     */
     public static CookieStore cookieStore;
+
+    /**
+     * httpclient返回状态码
+     */
     public static int resultCode;
 
-    //httpclient超时时间 单位：毫秒
+    //连接超时时间
     private static final int CONNECTION_TIMEOUT=10000;
+    //从连接池中取的连接的最长时间
     private static final int REQUEST_TIMEOUT=10000;
+    //数据传输的超时时间
     private static final int SOCKET_TIMEOUT=10000;
 
 
@@ -50,9 +58,10 @@ public class HttpForSessionUtils {
         //设置cookieStore
         cookieStore = new BasicCookieStore();
         CloseableHttpClient client = HttpClients.custom().setDefaultCookieStore(cookieStore).build();
-        RequestConfig config = RequestConfig.custom().setConnectTimeout(CONNECTION_TIMEOUT) //连接超时时间
-                .setConnectionRequestTimeout(REQUEST_TIMEOUT) //从连接池中取的连接的最长时间
-                .setSocketTimeout(SOCKET_TIMEOUT) //数据传输的超时时间
+        RequestConfig config = RequestConfig.custom()
+                .setConnectTimeout(CONNECTION_TIMEOUT)
+                .setConnectionRequestTimeout(REQUEST_TIMEOUT)
+                .setSocketTimeout(SOCKET_TIMEOUT)
                 .build();
         HttpPost post=new HttpPost(url);
         try {
@@ -93,11 +102,8 @@ public class HttpForSessionUtils {
         //设置cookieStore
         CloseableHttpClient httpClient = HttpClients.custom().setDefaultCookieStore(cookieStore).build();
         RequestConfig config = RequestConfig.custom()
-                //连接超时时间
                 .setConnectTimeout(CONNECTION_TIMEOUT)
-                  //从连接池中取的连接的最长时间
                 .setConnectionRequestTimeout(REQUEST_TIMEOUT)
-                //数据传输的超时时间
                 .setSocketTimeout(SOCKET_TIMEOUT)
                 .build();
 
@@ -123,11 +129,8 @@ public class HttpForSessionUtils {
         //设置cookieStore
         CloseableHttpClient client = HttpClients.custom().setDefaultCookieStore(cookieStore).build();
         RequestConfig config = RequestConfig.custom()
-                //连接超时时间
                 .setConnectTimeout(CONNECTION_TIMEOUT)
-                //从连接池中取的连接的最长时间
                 .setConnectionRequestTimeout(REQUEST_TIMEOUT)
-                //数据传输的超时时间
                 .setSocketTimeout(SOCKET_TIMEOUT)
                 .build();
 
@@ -156,11 +159,8 @@ public class HttpForSessionUtils {
         //设置cookieStore
         CloseableHttpClient client = HttpClients.custom().setDefaultCookieStore(cookieStore).build();
         RequestConfig config = RequestConfig.custom()
-                //连接超时时间
                 .setConnectTimeout(CONNECTION_TIMEOUT)
-                //从连接池中取的连接的最长时间
                 .setConnectionRequestTimeout(REQUEST_TIMEOUT)
-                //数据传输的超时时间
                 .setSocketTimeout(SOCKET_TIMEOUT)
                 .build();
         //封装请求参数
