@@ -3,8 +3,6 @@ package com.example.util;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.*;
 
@@ -29,7 +27,7 @@ public class JsonReadUtils {
         File jsonFile = new File(path);
         try {
             FileReader fileReader = new FileReader(jsonFile);
-            Reader reader = new InputStreamReader(new FileInputStream(jsonFile), "utf-8");
+            Reader reader = new InputStreamReader(new FileInputStream(jsonFile), "GBK");
             int ch = 0;
             StringBuffer sb = new StringBuffer();
             while ((ch = reader.read()) != -1) {
@@ -46,5 +44,6 @@ public class JsonReadUtils {
             return null;
         }
     }
+
 
 }

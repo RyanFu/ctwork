@@ -28,14 +28,9 @@ public class ProdQYDataCenter {
     private static String URL=Const.PRO_WJ_DATA_CENTER_URL;
 
 
-
-    //sheet8字段和参数
-    public static String PROD_PARAM_SHEET_008=Const.PROD_SHEET_008;
-    public static String FILE_NAME_SHEET_008="颜值贷0304";
-
     //sheet9字段和参数
-    public static String PROD_PARAM_SHEET_009=Const.PROD_SHEET_009;
-    public static String FILE_NAME_SHEET_009="好多数等三方数据字段";
+    public static String PROD_PARAM_SHEET_001=Const.PROD_SHEET_001;
+    public static String FILE_NAME_SHEET_009="三方字段";
 
 
     /**
@@ -57,7 +52,7 @@ public class ProdQYDataCenter {
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
 
-        JSONObject jsonObject =JsonReadUtils.readJsonFile(PROD_PARAM_SHEET_009);
+        JSONObject jsonObject =JsonReadUtils.readJsonFile(PROD_PARAM_SHEET_001);
         jsonObject.put("fields",var_name);
 
         String response = HttpClientUtils.doPostWithJson(URL, jsonObject, headers);

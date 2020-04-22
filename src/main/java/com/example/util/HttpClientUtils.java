@@ -3,13 +3,11 @@ package com.example.util;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.*;
-import org.apache.http.client.CookieStore;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
@@ -107,12 +105,12 @@ public class HttpClientUtils {
             }
 
             //将参数进行编码为合适的格式,如将键值对编码为 param1=value1&param2=value2
-            UrlEncodedFormEntity entity=new UrlEncodedFormEntity(list,"utf-8");
+            UrlEncodedFormEntity entity=new UrlEncodedFormEntity(list,Consts.UTF_8);
             post.setEntity(entity);
 
             HttpResponse response=client.execute(post);
             resultCode=response.getStatusLine().getStatusCode();
-            String result=EntityUtils.toString(response.getEntity(),"utf-8");
+            String result=EntityUtils.toString(response.getEntity(),Consts.UTF_8);
             return result;
 
         } catch (Exception e) {

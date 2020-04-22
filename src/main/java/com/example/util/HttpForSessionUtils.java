@@ -76,11 +76,11 @@ public class HttpForSessionUtils {
             }
 
             //将参数进行编码为合适的格式,如将键值对编码为param1=value1&param2=value2
-            UrlEncodedFormEntity entity=new UrlEncodedFormEntity(list,"utf-8");
+            UrlEncodedFormEntity entity=new UrlEncodedFormEntity(list,Consts.UTF_8);
             post.setEntity(entity);
             post.setConfig(config);
             HttpResponse response=client.execute(post);
-            String result=EntityUtils.toString(response.getEntity(),"utf-8");
+            String result=EntityUtils.toString(response.getEntity(),Consts.UTF_8);
             resultCode=response.getStatusLine().getStatusCode();
             log.info("登录生成的COOKIES:{}",cookieStore);
             return result;
@@ -92,33 +92,6 @@ public class HttpForSessionUtils {
     }
 
 
-
-    /**
-     * get请求,不含请求头,不含参数,只依赖登录生成的cookie
-     * @param url
-     * @return
-     */
-    public static String doGetOnlyUrl(String url){
-        //设置cookieStore
-        CloseableHttpClient httpClient = HttpClients.custom().setDefaultCookieStore(cookieStore).build();
-        RequestConfig config = RequestConfig.custom()
-                .setConnectTimeout(CONNECTION_TIMEOUT)
-                .setConnectionRequestTimeout(REQUEST_TIMEOUT)
-                .setSocketTimeout(SOCKET_TIMEOUT)
-                .build();
-
-        try {
-            HttpGet get=new HttpGet(url);
-            get.setConfig(config);
-            HttpResponse response=httpClient.execute(get);
-            resultCode=response.getStatusLine().getStatusCode();
-            String result= EntityUtils.toString(response.getEntity(),"utf-8");
-            return result;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 
     /**
      * get请求,不含请求头,不含参数，携带登录session请求
@@ -139,7 +112,7 @@ public class HttpForSessionUtils {
             get.setConfig(config);
             log.info("接口发送COOKIES:{}",cookieStore);
             HttpResponse httpResponse=client.execute(get);
-            String result=EntityUtils.toString(httpResponse.getEntity(),"utf-8");
+            String result=EntityUtils.toString(httpResponse.getEntity(),Consts.UTF_8);
             resultCode=httpResponse.getStatusLine().getStatusCode();
             return result;
         } catch (IOException e) {
@@ -174,7 +147,7 @@ public class HttpForSessionUtils {
             get.setConfig(config);
             log.info("get请求数据:{}",url+"?"+requestParams);
             HttpResponse httpResponse=client.execute(get);
-            String result=EntityUtils.toString(httpResponse.getEntity(),"utf-8");
+            String result=EntityUtils.toString(httpResponse.getEntity(),Consts.UTF_8);
             resultCode=httpResponse.getStatusLine().getStatusCode();
             return result;
         } catch (IOException e) {

@@ -1,0 +1,25 @@
+{
+	"inFields": {
+		"TRAFFIC":"JUMEI",
+		"PRODUCT":"JUMEI_CASHLOAN",
+		"TRAFFIC_CODE":"cl_drawInstallment",
+		"PHONENUM": "13184961068",
+		"IDCARD": "131182199110156665",
+		"idNumber":"131182199110156665",
+		"IDTYPE":"ID_CARD",
+		"CONTACTPHONENUMS":"13184961068",
+		"BANKCARDNUM":"6228485018573204572",
+		"CONTACNAME":"史向前",
+		"NAME": "史向前",
+		"UID":"40812868",
+		"versionId":313301554040832,
+		"TYPE":1,
+		"IP":"127.0.0.1",
+		"CYCLE":"6",
+		"LOANTYPE": "2",
+		"TID":"30628b47bfd04eb08dcb95037ebc56ee"
+	},
+	"pid": "test",
+	"uid": "40812868",
+	"organId": "12311"
+}
