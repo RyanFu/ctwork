@@ -61,6 +61,7 @@ public class HttpClientUtils {
 
         StringEntity entity=new StringEntity(param.toString(),"utf-8");
         //封装请求头，把map格式遍历出来
+       // Set<Map.Entry<String,String>> headMap=headers.entrySet();
         for (Map.Entry<String, String> header : headers.entrySet()){
             post.setHeader(header.getKey(),header.getValue());
         }
