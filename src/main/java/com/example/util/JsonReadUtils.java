@@ -27,7 +27,7 @@ public class JsonReadUtils {
         File jsonFile = new File(path);
         try {
             FileReader fileReader = new FileReader(jsonFile);
-            Reader reader = new InputStreamReader(new FileInputStream(jsonFile), "GBK");
+            Reader reader = new InputStreamReader(new FileInputStream(jsonFile), "UTF-8");
             int ch = 0;
             StringBuffer sb = new StringBuffer();
             while ((ch = reader.read()) != -1) {

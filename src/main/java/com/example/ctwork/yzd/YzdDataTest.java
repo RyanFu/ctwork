@@ -109,11 +109,10 @@ public class YzdDataTest {
                 demoData.setResult(res);
                 demoData.setNowTime(reqTime);
                 demoDataList.add(demoData);
-
+                log.warn(jsonObject.toJSONString());
                 log.info(reqTime+" "+UID+domain.getDesc()+" "+res+demoData);
             }
         }
-//        demoDataList.forEach(it -> System.out.println(it));
    }
 
     /**
