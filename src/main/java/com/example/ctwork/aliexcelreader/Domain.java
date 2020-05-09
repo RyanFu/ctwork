@@ -12,5 +12,8 @@ public class Domain {
 
     private String varName;
     private String desc;
-    private String message;
+    private String externalId;
+    private String idNumber;
+    private String name;
+    private String mobileNumber;
 }

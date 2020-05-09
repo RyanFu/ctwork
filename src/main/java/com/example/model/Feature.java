@@ -40,6 +40,25 @@ public class Feature {
         this.updateAt = updateAt;
     }
 
+
+    @Override
+    public String toString() {
+        return "Feature{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", varName='" + varName + '\'' +
+                ", alias='" + alias + '\'' +
+                ", defaultValue='" + defaultValue + '\'' +
+                ", dataType='" + dataType + '\'' +
+                ", description='" + description + '\'' +
+                ", bizId=" + bizId +
+                ", createBy='" + createBy + '\'' +
+                ", updateBy='" + updateBy + '\'' +
+                ", createAt=" + createAt +
+                ", updateAt=" + updateAt +
+                '}';
+    }
+
     public Feature() {
         super();
     }

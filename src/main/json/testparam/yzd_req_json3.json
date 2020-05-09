@@ -1,0 +1,22 @@
+{
+	"inFields": {
+		"BANKCARDNUM":"6214852127358136",
+		"TRAFFIC":"JUMEI",
+		"PRODUCT":"1",
+		"CARDPHONENO":"15317063103",
+		"TYPE":1,
+		"IP":"127.0.0.1",
+		"CYCLE":"6",
+		"LOANTYPE": "2",
+		"TID":"5f0a7dc291ec407f90bbe2d60",
+		"USER_SELLER_NO":"buy2397794728666988548",
+		"USER_SELLER_TYPE":"-1",
+		"ORDER_AMT":"150",
+		"engineId":"34567834567654"
+	},
+	"gid":"{{$guid}}",
+	"pid": "test",
+	"organId": "12311",
+	"engineId":"34567834567654"
+
+}
