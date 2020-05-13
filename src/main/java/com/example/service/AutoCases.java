@@ -84,7 +84,9 @@ public class AutoCases {
         int i=autoTestCaseMapper.updateByPrimaryKeySelective(autoTestCaseWithBLOBs);
         if(i>0){
             log.info("用例状态初始化成功.....");
-        }else log.error("用例状态初始化失败.....");
+        }else {
+            log.error("用例状态初始化失败.....");
+        }
         return i;
     }
 
@@ -96,7 +98,9 @@ public class AutoCases {
         int i=autoTestCaseMapper.updateByPrimaryKeySelective(autoTestCaseWithBLOBs);
         if(i>0){
             log.info("用例执行状态修改成功.....");
-        }else log.error("用例执行状态修改失败.....");
+        }else {
+            log.error("用例执行状态修改失败.....");
+        }
         return i;
     }
 }

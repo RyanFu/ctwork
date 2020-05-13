@@ -86,20 +86,20 @@ public class ApiTestUtils{
                 resultCode=HttpClientUtils.resultCode;
               log.info("请求地址:{},请求参数:{},返回结果:{}",url,requestBody,JSON.parseObject(response));
             } if(PARAM_TYPE_101.equals(param_type)){
-              response= HttpForSessionUtils.doPostWithKeyValueGetSession(url,requestBody,headMap);
-              resultCode=HttpForSessionUtils.resultCode;
+              response= HttpWithSessionUtils.doPostWithKeyValueGetSession(url,requestBody,headMap);
+              resultCode= HttpWithSessionUtils.resultCode;
               log.info("请求地址:{},请求参数:{},返回结果:{}",url,requestBody,JSON.parseObject(response));
             }
         }
         //判断请求方式为get
         if(GET_METHOD.equals(method)){
             if(PARAM_TYPE_200.equals(param_type)){
-               response=HttpForSessionUtils.doGetOnlyUrlWithSession(url);
-               resultCode=HttpForSessionUtils.resultCode;
+               response= HttpWithSessionUtils.doGetOnlyUrlWithSession(url);
+               resultCode= HttpWithSessionUtils.resultCode;
                log.info("请求地址:{},返回结果:{}",url,JSON.parseObject(response));
             }if(PARAM_TYPE_201.equals(param_type)){
-                response=HttpForSessionUtils.doGetWithParamsWithSession(url,requestBody);
-                resultCode=HttpForSessionUtils.resultCode;
+                response= HttpWithSessionUtils.doGetWithParamsWithSession(url,requestBody);
+                resultCode= HttpWithSessionUtils.resultCode;
                 log.info("请求地址:{},返回结果:{}",url,JSON.parseObject(response));
             }
         }

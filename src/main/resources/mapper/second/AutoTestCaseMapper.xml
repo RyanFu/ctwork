@@ -218,4 +218,15 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="findAutoTestCaseIdList" parameterType="java.util.List" resultType="com.example.model.AutoTestCase">
+    select
+    <include refid="Base_Column_List"></include>
+    from auto_test_case
+    where id in
+    <foreach collection="list" item="id" index="iddex"
+             open="(" close=")" separator=",">
+        #{id}
+    </foreach>
+  </select>
 </mapper>

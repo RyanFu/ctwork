@@ -27,7 +27,7 @@ import java.util.Map;
  * @Description  依赖cookies/生成cookies的方法
  */
 @Slf4j
-public class HttpForSessionUtils {
+public class HttpWithSessionUtils {
     /**
      * 登录成功生成的session
      */

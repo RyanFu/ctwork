@@ -4,15 +4,18 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.dao.second.AutoTestCaseMapper;
 import com.example.enums.CaseEnum;
+import com.example.model.AutoTestCase;
 import com.example.model.AutoTestCaseWithBLOBs;
 import com.example.service.AutoTestCaseService;
 import com.example.util.ApiTestUtils;
-import com.example.util.HttpForSessionUtils;
 import com.example.vo.ResponseResult;
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 /**
@@ -47,8 +50,6 @@ public class AutoTestCaseServiceImpl implements AutoTestCaseService {
             updateAutoTestCaseAfterTest(id,response,CaseEnum.FAIL.getMessage());
             throw new RuntimeException("用例执行失败...");
         }
-
-
         return ResponseResult.createBySuccessMessage(result);
     }
 
@@ -67,11 +68,46 @@ public class AutoTestCaseServiceImpl implements AutoTestCaseService {
             updateAutoTestCaseAfterTest(id,response,CaseEnum.FAIL.getMessage());
             throw new RuntimeException("用例执行失败...");
         }
-
-
         return ResponseResult.createBySuccessMessage(result);
 
     }
+
+    /**
+     * 批量执行用例
+     * @param ids
+     * @return
+     */
+    @Override
+    public ResponseResult AutoTestCaseByListIds(List<Integer> ids) {
+        List<AutoTestCase> list=autoTestCaseMapper.findAutoTestCaseIdList(ids);
+        List<ResponseResult> responseResultList= Lists.newArrayList();
+        for (AutoTestCase autoTestCase:list){
+        // responseResultList.add(AutoTestCaseById(autoTestCase.getId()));
+            //调用登录
+            if(autoTestCase.getId()==22){
+                //直接注册，不要登录
+                responseResultList.add(AutoTestCaseById(autoTestCase.getId()));
+            }
+            if(autoTestCase.getId()==15){
+                //直接登录
+                loginCase(autoTestCase.getId());
+                return ResponseResult.createBySuccessMessage("初始化登录成功！！！");
+            }else {
+                //先登录在操作其他
+                loginCase(15);
+                responseResultList.add(AutoTestCaseById(autoTestCase.getId()));
+            }
+        }
+        return ResponseResult.createBySuccessMessage(responseResultList);
+    }
+
+
+
+
+
+
+
+
 
 
 
@@ -93,7 +129,6 @@ public class AutoTestCaseServiceImpl implements AutoTestCaseService {
         }else {log.error("用例id:{},执行结果:{}","用例状态初始化失败.....");
             throw new RuntimeException("用例编号id"+id+"用例状态初始化失败");
         }
-
         return i;
     }
 
@@ -119,5 +154,8 @@ public class AutoTestCaseServiceImpl implements AutoTestCaseService {
         }
         return i;
     }
+
+
+
 
 }
