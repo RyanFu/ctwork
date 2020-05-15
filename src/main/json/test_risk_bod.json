@@ -1,0 +1,19 @@
+{
+  "act": "query",
+  "callbackUrl": "http://localhost:9000/api/decision/simpleResultCallback",
+  "dataSource": 1,
+  "engineCode": "Kreditpintar",
+  "engineId": "339342521563136",
+  "isCalcMatrix": false,
+  "nonce": "ckstcrpd99",
+  "organId": 74,
+  "pid": "test",
+  "uid":"003dca9a76d143d6910337e3da137d9d",
+  "reqType": 1,
+  "sign": "988dc12d0412ad4147b9805af175be6b",
+  "inFields": {
+    "TRAFFIC":"JUMEI",
+    "UID":"003dca9a76d143d6910337e3da137d9d",
+    "PRODUCT":"1"
+  }
+}

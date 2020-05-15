@@ -1,6 +1,8 @@
-package com.example.dao.third;
+package com.example.dao;
 
 import com.example.model.Feature;
+
+import java.util.List;
 
 public interface FeatureMapper {
     int deleteByPrimaryKey(Long id);
@@ -14,4 +16,6 @@ public interface FeatureMapper {
     int updateByPrimaryKeySelective(Feature record);
 
     int updateByPrimaryKey(Feature record);
+
+    List<Feature> findAllFeature();
 }

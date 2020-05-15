@@ -21,13 +21,13 @@
     id, name, var_name, alias, default_value, data_type, description, biz_id, create_by, 
     update_by, create_at, update_at
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from feature
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey">
     delete from feature
     where id = #{id,jdbcType=BIGINT}
   </delete>
@@ -176,4 +176,8 @@
       update_at = #{updateAt,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="findAllFeature" resultType="com.example.model.Feature">
+    select * from feature
+  </select>
 </mapper>
