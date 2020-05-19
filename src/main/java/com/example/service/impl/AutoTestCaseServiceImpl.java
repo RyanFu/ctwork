@@ -12,6 +12,7 @@ import com.example.vo.ResponseResult;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpStatus;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +33,7 @@ public class AutoTestCaseServiceImpl implements AutoTestCaseService {
     private AutoTestCaseMapper autoTestCaseMapper;
 
     /**
-     * 调用登录接口
+     * 调用登陆/注册单接口
      * @param id
      * @return
      */
@@ -41,7 +42,6 @@ public class AutoTestCaseServiceImpl implements AutoTestCaseService {
         AutoTestCaseWithBLOBs autoTestCaseWithBLOBs=autoTestCaseMapper.selectByPrimaryKey(id);
         //用例状态初始化
         updateAutoTestCaseBeforeTest(id);
-
         String response=ApiTestUtils.doHttpRequest(autoTestCaseWithBLOBs);
         JSONObject result=JSON.parseObject(response);
         if(ApiTestUtils.resultCode==HttpStatus.SC_OK){
@@ -54,13 +54,28 @@ public class AutoTestCaseServiceImpl implements AutoTestCaseService {
     }
 
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Override
     public ResponseResult AutoTestCaseById(int id) {
+        String response=null;
         AutoTestCaseWithBLOBs autoTestCaseWithBLOBs=autoTestCaseMapper.selectByPrimaryKey(id);
         //用例状态初始化
         updateAutoTestCaseBeforeTest(id);
-
-        String response=ApiTestUtils.doHttpRequest(autoTestCaseWithBLOBs);
+        if(id==22){
+            //只做注册操作
+            return loginCase(22);
+        }if(id==15){
+            //直接登陆
+            return loginCase(15);
+        }else {
+             //先登录在操作其他
+            loginCase(15);
+            response=ApiTestUtils.doHttpRequest(autoTestCaseWithBLOBs);
+        }
         JSONObject result=JSON.parseObject(response);
         if(ApiTestUtils.resultCode==HttpStatus.SC_OK){
             updateAutoTestCaseAfterTest(id,response,CaseEnum.SUCCESS.getMessage());
@@ -80,33 +95,15 @@ public class AutoTestCaseServiceImpl implements AutoTestCaseService {
     @Override
     public ResponseResult AutoTestCaseByListIds(List<Integer> ids) {
         List<AutoTestCase> list=autoTestCaseMapper.findAutoTestCaseIdList(ids);
-        List<ResponseResult> responseResultList= Lists.newArrayList();
+        List<Object> responseResultList= Lists.newArrayList();
         for (AutoTestCase autoTestCase:list){
-        // responseResultList.add(AutoTestCaseById(autoTestCase.getId()));
-            //调用登录
-            if(autoTestCase.getId()==22){
-                //直接注册，不要登录
-                responseResultList.add(AutoTestCaseById(autoTestCase.getId()));
-            }
-            if(autoTestCase.getId()==15){
-                //直接登录
-                loginCase(autoTestCase.getId());
-                return ResponseResult.createBySuccessMessage("初始化登录成功！！！");
-            }else {
-                //先登录在操作其他
-                loginCase(15);
-                responseResultList.add(AutoTestCaseById(autoTestCase.getId()));
-            }
+            ResponseResult result=AutoTestCaseById(autoTestCase.getId());
+            JSONObject jsonObject=new JSONObject();
+            jsonObject.put("data",result.getData());
+           responseResultList.add(jsonObject);
         }
         return ResponseResult.createBySuccessMessage(responseResultList);
     }
-
-
-
-
-
-
-
 
 
 

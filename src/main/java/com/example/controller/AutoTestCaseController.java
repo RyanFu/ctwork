@@ -24,20 +24,7 @@ public class AutoTestCaseController {
 
     @GetMapping(value = "/auto/test")
     public ResponseResult cseTestById(@RequestParam int id){
-        //调用登录
-        if(id==22){
-            //直接注册，不要登录
             return autoTestCaseService.AutoTestCaseById(id);
-        }
-        if(id==15){
-            //直接登录
-           autoTestCaseService.loginCase(id);
-           return ResponseResult.createBySuccessMessage("初始化登录成功！！！");
-        }else {
-            //先登录在操作其他
-            autoTestCaseService.loginCase(15);
-            return autoTestCaseService.AutoTestCaseById(id);
-        }
     }
 
     /**
