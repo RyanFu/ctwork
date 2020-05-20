@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
  * @Version 1.0
  *
  *
- * httpclient工具类   httpclient版本4.1.2
+ * httpclient工具类
  */
 @Slf4j
 public class HttpClientUtils {
